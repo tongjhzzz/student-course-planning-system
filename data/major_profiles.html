@@ -1,0 +1,1921 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>专业培养要求样例</title>
+  <style>
+    :root {
+      --bg: #f7f6f2;
+      --panel: #fff;
+      --ink: #1d2329;
+      --muted: #65717d;
+      --line: #d8d4ca;
+      --teal: #276b62;
+      --gold: #b07a20;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.45;
+    }
+    header, main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 18px 24px;
+    }
+    h1 { margin: 0; font-size: 24px; letter-spacing: 0; }
+    .sub { color: var(--muted); margin-top: 4px; font-size: 13px; }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    summary {
+      cursor: pointer;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) repeat(5, minmax(90px, auto));
+      gap: 12px;
+      align-items: center;
+      font-weight: 750;
+    }
+    .metric { color: var(--muted); font-size: 12px; text-align: right; }
+    .metric strong { color: var(--teal); display: block; font-size: 18px; }
+    .body { padding: 0 16px 16px; }
+    .desc { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #ece8df; padding: 7px 8px; text-align: left; vertical-align: top; }
+    th { background: #f3f0e8; }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 7px;
+      color: var(--gold);
+      background: #fbfaf7;
+      white-space: nowrap;
+    }
+    @media (max-width: 980px) {
+      summary { grid-template-columns: 1fr 1fr; }
+      header, main { padding-left: 14px; padding-right: 14px; }
+      .metric { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>专业培养要求样例</h1>
+    <div class="sub">所有课程号均来自 course_info.csv；这些文件可作为用户选择专业后的规划约束模板。</div>
+  </header>
+  <main><section>
+      <details>
+        <summary>
+          <span>计算机科学与技术专业样例<br><span style="color:var(--muted);font-weight:500">计算机科学与技术学院</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>108.5</strong>必修学分</span>
+          <span class="metric"><strong>37</strong>必修门数</span>
+          <span class="metric"><strong>24</strong>专业选修最低</span>
+          <span class="metric"><strong>41.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">适合测试计算机专业的核心课、跨学院选修和先修链规划。</p>
+          <p class="desc">支持院系：软件工程学院、数据科学与工程学院、人工智能学院、数学科学学院、统计学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>COMS0031121013</td>
+          <td>数学分析I</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031112015</td>
+          <td>Web系统开发</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031112004</td>
+          <td>分布式系统</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031112028</td>
+          <td>分布式系统专题</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031112018</td>
+          <td>智能课程规划实践案例研究</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031112020</td>
+          <td>智能课程规划实践进阶</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121004</td>
+          <td>程序设计原理与C语言</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131026</td>
+          <td>计算机导论</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121014</td>
+          <td>数学分析II</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131032</td>
+          <td>线性代数</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031122033</td>
+          <td>云计算基础</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031122031</td>
+          <td>区块链技术实验</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121015</td>
+          <td>数字逻辑电路</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121009</td>
+          <td>数据结构</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131013</td>
+          <td>离散数学</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031122017</td>
+          <td>高级程序设计实验</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031132022</td>
+          <td>分布式系统实验</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031132032</td>
+          <td>分布式系统案例研究</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr><tr><td colspan="6">还有 19 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>人工智能专业样例<br><span style="color:var(--muted);font-weight:500">人工智能学院</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>69</strong>必修学分</span>
+          <span class="metric"><strong>22</strong>必修门数</span>
+          <span class="metric"><strong>28</strong>专业选修最低</span>
+          <span class="metric"><strong>81</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">强调机器学习、智能系统、数据与算法基础。</p>
+          <p class="desc">支持院系：计算机科学与技术学院、数据科学与工程学院、软件工程学院、数学科学学院、统计学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>AINT0031112013</td>
+          <td>AI安全与伦理实践</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031112009</td>
+          <td>生成式人工智能实践</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031112020</td>
+          <td>生成式人工智能案例研究</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031112016</td>
+          <td>神经网络基础</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121013</td>
+          <td>数学分析I</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121004</td>
+          <td>程序设计原理与C语言</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031122006</td>
+          <td>智能规划实验</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121014</td>
+          <td>数学分析II</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121009</td>
+          <td>数据结构</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131013</td>
+          <td>离散数学</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031132010</td>
+          <td>智能机器人</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031132015</td>
+          <td>机器学习实践</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>STAT0031121004</td>
+          <td>概率论与数理统计A</td>
+          <td>统计学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131042</td>
+          <td>人工智能</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031142008</td>
+          <td>强化学习实践</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031142005</td>
+          <td>生成式人工智能课程设计</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031152007</td>
+          <td>强化学习实验</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>AINT0031152021</td>
+          <td>模式识别专题</td>
+          <td>人工智能学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr><tr><td colspan="6">还有 4 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>数据科学与大数据技术专业样例<br><span style="color:var(--muted);font-weight:500">数据科学与工程学院</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>70.5</strong>必修学分</span>
+          <span class="metric"><strong>22</strong>必修门数</span>
+          <span class="metric"><strong>28</strong>专业选修最低</span>
+          <span class="metric"><strong>79.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">强调数据库、大数据处理、统计建模和数据产品实践。</p>
+          <p class="desc">支持院系：计算机科学与技术学院、人工智能学院、软件工程学院、数学科学学院、统计学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>COMS0031121013</td>
+          <td>数学分析I</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031112016</td>
+          <td>数据可视化专题</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031112019</td>
+          <td>数据库应用开发</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031112017</td>
+          <td>知识图谱实践</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121004</td>
+          <td>程序设计原理与C语言</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121014</td>
+          <td>数学分析II</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031122007</td>
+          <td>图数据库技术实践</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031122001</td>
+          <td>大数据处理技术实践</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031122009</td>
+          <td>数据仓库与数据挖掘专题</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031122002</td>
+          <td>知识图谱课程设计</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121009</td>
+          <td>数据结构</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131013</td>
+          <td>离散数学</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031132012</td>
+          <td>数据产品实践</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131019</td>
+          <td>数据库系统原理与实践</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>STAT0031121004</td>
+          <td>概率论与数理统计A</td>
+          <td>统计学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031142011</td>
+          <td>推荐系统课程设计</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031142004</td>
+          <td>数据产品实践案例研究</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>DATA0031142013</td>
+          <td>数据治理专题</td>
+          <td>数据科学与工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 4 学期</td>
+        </tr><tr><td colspan="6">还有 4 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>软件工程专业样例<br><span style="color:var(--muted);font-weight:500">软件工程学院</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>62.5</strong>必修学分</span>
+          <span class="metric"><strong>24</strong>必修门数</span>
+          <span class="metric"><strong>26</strong>专业选修最低</span>
+          <span class="metric"><strong>87.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">强调软件设计、测试、工程实践和项目管理。</p>
+          <p class="desc">支持院系：计算机科学与技术学院、数据科学与工程学院、人工智能学院、数学科学学院、统计学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>COMS0031121013</td>
+          <td>数学分析I</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121004</td>
+          <td>程序设计原理与C语言</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031112013</td>
+          <td>低代码平台设计实验</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031112004</td>
+          <td>软件项目管理</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031112018</td>
+          <td>软件项目管理专题</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>1.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031112024</td>
+          <td>软件项目管理实验</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121014</td>
+          <td>数学分析II</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121009</td>
+          <td>数据结构</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131013</td>
+          <td>离散数学</td>
+          <td>计算机科学与技术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031122012</td>
+          <td>前端工程实践进阶</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>1.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031122011</td>
+          <td>软件测试技术实践</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>1.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031122015</td>
+          <td>软件测试技术案例研究</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031122006</td>
+          <td>软件项目管理实践</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>STAT0031121004</td>
+          <td>概率论与数理统计A</td>
+          <td>统计学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031132017</td>
+          <td>低代码平台设计专题</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031132003</td>
+          <td>前端工程实践实验</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031142009</td>
+          <td>前端工程实践专题</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>SOFT0031142021</td>
+          <td>前端工程实践课程设计</td>
+          <td>软件工程学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr><tr><td colspan="6">还有 6 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>数学与应用数学（师范）专业样例<br><span style="color:var(--muted);font-weight:500">数学科学学院</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>45</strong>必修学分</span>
+          <span class="metric"><strong>16</strong>必修门数</span>
+          <span class="metric"><strong>22</strong>专业选修最低</span>
+          <span class="metric"><strong>105</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">适合测试师范类理科专业，包含数学基础和教育类选修。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、心理与认知科学学院、计算机科学与技术学院、统计学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>MATH0031112012</td>
+          <td>偏微分方程实验</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121013</td>
+          <td>数学分析I</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031112014</td>
+          <td>数学建模实验</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031112019</td>
+          <td>运筹学课程设计</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031122021</td>
+          <td>偏微分方程专题</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031122022</td>
+          <td>实变函数课程设计</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031121014</td>
+          <td>数学分析II</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>COMS0031131032</td>
+          <td>线性代数</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031122008</td>
+          <td>组合数学案例研究</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031132006</td>
+          <td>数学建模</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031132005</td>
+          <td>矩阵分析实践</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031142011</td>
+          <td>优化方法课程设计</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031142023</td>
+          <td>复变函数</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031152007</td>
+          <td>数值分析课程设计</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031162013</td>
+          <td>优化方法实践</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 6 学期</td>
+        </tr>
+<tr>
+          <td>MATH0031182001</td>
+          <td>优化方法实验</td>
+          <td>数学科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 8 学期</td>
+        </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>汉语言文学（师范）专业样例<br><span style="color:var(--muted);font-weight:500">中国语言文学系</span></span>
+          <span class="metric"><strong>150</strong>总学分下限</span>
+          <span class="metric"><strong>98.5</strong>必修学分</span>
+          <span class="metric"><strong>38</strong>必修门数</span>
+          <span class="metric"><strong>22</strong>专业选修最低</span>
+          <span class="metric"><strong>51.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">覆盖语言文学、语文课程教学论和人文社科选修。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、历史学系、哲学系、外语学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>CHIN0031112021</td>
+          <td>中国文学批评史实践</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031112006</td>
+          <td>古代汉语专题</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031112004</td>
+          <td>世界近现代史实验</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PHIL0031112010</td>
+          <td>现代西方哲学实验</td>
+          <td>哲学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PHIL0031112013</td>
+          <td>科学技术哲学实践</td>
+          <td>哲学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>POLI0031112015</td>
+          <td>基层治理专题</td>
+          <td>政治与国际关系学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>SOCI0031112002</td>
+          <td>社会政策实践</td>
+          <td>社会发展学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122019</td>
+          <td>中国现当代文学实践</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122028</td>
+          <td>古代汉语课程设计</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122036</td>
+          <td>外国文学案例研究</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122015</td>
+          <td>汉字学专题</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122005</td>
+          <td>语文课程与教学论案例研究</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031122011</td>
+          <td>语言学概论</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122003</td>
+          <td>历史地理学实验</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122002</td>
+          <td>历史文献学</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122030</td>
+          <td>考古学通论</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031132034</td>
+          <td>古代汉语实践</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>CHIN0031132010</td>
+          <td>外国文学</td>
+          <td>中国语言文学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr><tr><td colspan="6">还有 20 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>历史学（师范）专业样例<br><span style="color:var(--muted);font-weight:500">历史学系</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>68.5</strong>必修学分</span>
+          <span class="metric"><strong>25</strong>必修门数</span>
+          <span class="metric"><strong>20</strong>专业选修最低</span>
+          <span class="metric"><strong>76.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">覆盖历史核心课程、史学方法和教师教育课程。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、中国语言文学系、哲学系、政治与国际关系学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>HIST0031112004</td>
+          <td>世界近现代史实验</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031112009</td>
+          <td>中国古代史课程设计</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031112022</td>
+          <td>历史地理学</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031112024</td>
+          <td>口述史方法课程设计</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031112011</td>
+          <td>考古学通论专题</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122019</td>
+          <td>世界古代史</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122031</td>
+          <td>世界近现代史课程设计</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122003</td>
+          <td>历史地理学实验</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122002</td>
+          <td>历史文献学</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122017</td>
+          <td>历史文献学实验</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031122030</td>
+          <td>考古学通论</td>
+          <td>历史学系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>SOCI0031122005</td>
+          <td>人口学实践</td>
+          <td>社会发展学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031132032</td>
+          <td>史学概论案例研究</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>SOCI0031132001</td>
+          <td>社会政策实验</td>
+          <td>社会发展学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031132016</td>
+          <td>历史课程与教学论实践</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业选修课</span></td>
+          <td>2</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>POLI0031132004</td>
+          <td>中国政府与政治实验</td>
+          <td>政治与国际关系学院</td>
+          <td><span class="tag">专业选修课</span></td>
+          <td>1.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>HIST0031142021</td>
+          <td>口述史方法专题</td>
+          <td>历史学系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>POLI0031142001</td>
+          <td>政治传播学专题</td>
+          <td>政治与国际关系学院</td>
+          <td><span class="tag">专业选修课</span></td>
+          <td>3</td>
+          <td>第 4 学期</td>
+        </tr><tr><td colspan="6">还有 7 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>心理学专业样例<br><span style="color:var(--muted);font-weight:500">心理与认知科学学院</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>35.5</strong>必修学分</span>
+          <span class="metric"><strong>12</strong>必修门数</span>
+          <span class="metric"><strong>22</strong>专业选修最低</span>
+          <span class="metric"><strong>109.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">覆盖发展、教育、实验、测量和咨询心理方向。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、社会发展学院、统计学院、计算机科学与技术学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>PSYC0031122013</td>
+          <td>咨询心理学</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031122023</td>
+          <td>咨询心理学专题</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031122009</td>
+          <td>认知心理学实践</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031132015</td>
+          <td>儿童青少年心理发展实验</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031132020</td>
+          <td>学习心理学实践</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031132024</td>
+          <td>普通心理学案例研究</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031132005</td>
+          <td>认知心理学</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031142003</td>
+          <td>教育心理学</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031142021</td>
+          <td>教育心理学实验</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031152010</td>
+          <td>心理测量实践</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031172002</td>
+          <td>儿童青少年心理发展专题</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 7 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031182004</td>
+          <td>学校心理辅导专题</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 8 学期</td>
+        </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>小学教育专业样例<br><span style="color:var(--muted);font-weight:500">小学教育系</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>50</strong>必修学分</span>
+          <span class="metric"><strong>18</strong>必修门数</span>
+          <span class="metric"><strong>20</strong>专业选修最低</span>
+          <span class="metric"><strong>95</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">强调小学语文、数学、科学教学设计和儿童发展。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、心理与认知科学学院、中国语言文学系、数学科学学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>PRIM0031112005</td>
+          <td>小学教师专业技能实验</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031112021</td>
+          <td>小学教育学实践</td>
+          <td>小学教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031112003</td>
+          <td>小学教育学实验</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031112013</td>
+          <td>小学科学教学设计实验</td>
+          <td>小学教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031112018</td>
+          <td>小学语文教学设计案例研究</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031112001</td>
+          <td>小学课程标准解读实践</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>EDUC0031112006</td>
+          <td>数字化学习设计案例研究</td>
+          <td>教育学部</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031122015</td>
+          <td>小学语文教学设计实践</td>
+          <td>小学教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031122013</td>
+          <td>咨询心理学</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PSYC0031122009</td>
+          <td>认知心理学实践</td>
+          <td>心理与认知科学学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031132004</td>
+          <td>儿童阅读指导</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031132017</td>
+          <td>小学语文教学设计</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031142010</td>
+          <td>少先队活动设计专题</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031152006</td>
+          <td>小学数学教学设计</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031152011</td>
+          <td>少先队活动设计</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031172012</td>
+          <td>小学科学教学设计实践</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 7 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031182019</td>
+          <td>儿童发展与教育实践</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 8 学期</td>
+        </tr>
+<tr>
+          <td>PRIM0031182002</td>
+          <td>小学课程标准解读实验</td>
+          <td>小学教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 8 学期</td>
+        </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>学前教育专业样例<br><span style="color:var(--muted);font-weight:500">学前教育系</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>59</strong>必修学分</span>
+          <span class="metric"><strong>21</strong>必修门数</span>
+          <span class="metric"><strong>20</strong>专业选修最低</span>
+          <span class="metric"><strong>86</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">强调幼儿心理、幼儿园课程、游戏和艺术教育。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、心理与认知科学学院、音乐学院、美术学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>PREE0031112017</td>
+          <td>学前儿童科学教育实验</td>
+          <td>学前教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031112019</td>
+          <td>幼儿园环境创设课程设计</td>
+          <td>学前教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031112003</td>
+          <td>幼儿园班级管理课程设计</td>
+          <td>学前教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031112013</td>
+          <td>幼儿心理学实践</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>EDUC0031112002</td>
+          <td>教育技术学专题</td>
+          <td>教育学部</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031122030</td>
+          <td>学前教育学课程设计</td>
+          <td>学前教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031122016</td>
+          <td>幼儿园课程</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031122023</td>
+          <td>幼儿园课程实践</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031122005</td>
+          <td>幼儿心理学实验</td>
+          <td>学前教育系</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>1.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031142008</td>
+          <td>幼儿园环境创设实验</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152002</td>
+          <td>亲子教育指导实验</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152009</td>
+          <td>儿童行为观察实践</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152011</td>
+          <td>学前教育学专题</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152025</td>
+          <td>学前教育学实验</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152010</td>
+          <td>幼儿心理学</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031152014</td>
+          <td>幼儿游戏理论案例研究</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>PREE0031162015</td>
+          <td>学前儿童科学教育</td>
+          <td>学前教育系</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 6 学期</td>
+        </tr>
+<tr>
+          <td>EDUC0031162011</td>
+          <td>教育数据分析课程设计</td>
+          <td>教育学部</td>
+          <td><span class="tag">专业选修课</span></td>
+          <td>2.5</td>
+          <td>第 6 学期</td>
+        </tr><tr><td colspan="6">还有 3 门必修/基础课程，详见 JSON 文件。</td></tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>英语教育方向专业样例<br><span style="color:var(--muted);font-weight:500">外语学院</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>41</strong>必修学分</span>
+          <span class="metric"><strong>15</strong>必修门数</span>
+          <span class="metric"><strong>20</strong>专业选修最低</span>
+          <span class="metric"><strong>104</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">适合测试语言类师范专业和跨文化交流课程。</p>
+          <p class="desc">支持院系：教育学部、教师教育学院、中国语言文学系、传播学院、心理与认知科学学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>LANG0031112010</td>
+          <td>日语入门专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031112021</td>
+          <td>科技英语写作案例研究</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031112004</td>
+          <td>英语演讲实验</td>
+          <td>外语学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031122019</td>
+          <td>翻译实践专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031122016</td>
+          <td>语言与人工智能</td>
+          <td>外语学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031122001</td>
+          <td>语言与人工智能课程设计</td>
+          <td>外语学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031132007</td>
+          <td>语言与人工智能专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 3 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031142017</td>
+          <td>商务英语课程设计</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031142008</td>
+          <td>学术英语实践</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031152022</td>
+          <td>商务英语专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031152011</td>
+          <td>翻译实践</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031152006</td>
+          <td>语言与人工智能案例研究</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031162002</td>
+          <td>法语入门实践</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 6 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031172018</td>
+          <td>学术英语专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 7 学期</td>
+        </tr>
+<tr>
+          <td>LANG0031172020</td>
+          <td>英语演讲专题</td>
+          <td>外语学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 7 学期</td>
+        </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+<section>
+      <details>
+        <summary>
+          <span>美术教育专业样例<br><span style="color:var(--muted);font-weight:500">美术学院</span></span>
+          <span class="metric"><strong>145</strong>总学分下限</span>
+          <span class="metric"><strong>47.5</strong>必修学分</span>
+          <span class="metric"><strong>15</strong>必修门数</span>
+          <span class="metric"><strong>20</strong>专业选修最低</span>
+          <span class="metric"><strong>97.5</strong>实际补足选修</span>
+        </summary>
+        <div class="body">
+          <p class="desc">覆盖美术基础、艺术史、课程教学论和设计类选修。</p>
+          <p class="desc">支持院系：设计学院、教育学部、教师教育学院、中国语言文学系、音乐学院</p>
+          <table>
+            <thead><tr><th>课程号</th><th>课程名</th><th>院系</th><th>类别</th><th>学分</th><th>建议学期</th></tr></thead>
+            <tbody><tr>
+          <td>ARTS0031112009</td>
+          <td>中国美术史案例研究</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031112013</td>
+          <td>素描实验</td>
+          <td>美术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>2</td>
+          <td>第 1 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031122005</td>
+          <td>中国美术史专题</td>
+          <td>美术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031122007</td>
+          <td>油画基础案例研究</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031122016</td>
+          <td>素描课程设计</td>
+          <td>美术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>4.5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031122021</td>
+          <td>美术课程与教学论专题</td>
+          <td>美术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>5</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031122030</td>
+          <td>雕塑基础课程设计</td>
+          <td>美术学院</td>
+          <td><span class="tag">学科基础课</span></td>
+          <td>3</td>
+          <td>第 2 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031142022</td>
+          <td>外国美术史</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031142014</td>
+          <td>油画基础实践</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>1.5</td>
+          <td>第 4 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031152025</td>
+          <td>书法基础</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031152011</td>
+          <td>视觉文化研究专题</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>4</td>
+          <td>第 5 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031162008</td>
+          <td>书法基础案例研究</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3.5</td>
+          <td>第 6 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031162015</td>
+          <td>美术课程与教学论课程设计</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 6 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031172029</td>
+          <td>外国美术史实验</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>2</td>
+          <td>第 7 学期</td>
+        </tr>
+<tr>
+          <td>ARTS0031172006</td>
+          <td>油画基础实验</td>
+          <td>美术学院</td>
+          <td><span class="tag">专业必修课</span></td>
+          <td>3</td>
+          <td>第 7 学期</td>
+        </tr></tbody>
+          </table>
+        </div>
+      </details>
+    </section></main>
+</body>
+</html>
