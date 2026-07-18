@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/Users/daxian/个人项目/学生版-智能课程规划系统/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -isystem /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers -iframework /Users/daxian/Qt/6.11.1/macos/lib -isystem /Users/daxian/Qt/6.11.1/macos/mkspecs/macx-clang -isystem /Users/daxian/Qt/6.11.1/macos/include -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -o CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/main.cpp",
+  "file": "/Users/daxian/个人项目/学生版-智能课程规划系统/src/main.cpp",
+  "output": "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o"
+},
+{
+  "directory": "/Users/daxian/个人项目/学生版-智能课程规划系统/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -isystem /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers -iframework /Users/daxian/Qt/6.11.1/macos/lib -isystem /Users/daxian/Qt/6.11.1/macos/mkspecs/macx-clang -isystem /Users/daxian/Qt/6.11.1/macos/include -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -o CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/model/course.cpp",
+  "file": "/Users/daxian/个人项目/学生版-智能课程规划系统/src/model/course.cpp",
+  "output": "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o"
+},
+{
+  "directory": "/Users/daxian/个人项目/学生版-智能课程规划系统/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -isystem /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers -iframework /Users/daxian/Qt/6.11.1/macos/lib -isystem /Users/daxian/Qt/6.11.1/macos/mkspecs/macx-clang -isystem /Users/daxian/Qt/6.11.1/macos/include -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -o CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/data/course_repository.cpp",
+  "file": "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/course_repository.cpp",
+  "output": "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o"
+},
+{
+  "directory": "/Users/daxian/个人项目/学生版-智能课程规划系统/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -isystem /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers -iframework /Users/daxian/Qt/6.11.1/macos/lib -isystem /Users/daxian/Qt/6.11.1/macos/mkspecs/macx-clang -isystem /Users/daxian/Qt/6.11.1/macos/include -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -o CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/data/csv_reader.cpp",
+  "file": "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/csv_reader.cpp",
+  "output": "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o"
+},
+{
+  "directory": "/Users/daxian/个人项目/学生版-智能课程规划系统/build",
+  "command": "/usr/bin/clang++ -DQT_CORE_LIB -isystem /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers -iframework /Users/daxian/Qt/6.11.1/macos/lib -isystem /Users/daxian/Qt/6.11.1/macos/mkspecs/macx-clang -isystem /Users/daxian/Qt/6.11.1/macos/include -g -std=c++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk -o CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/data/json_reader.cpp",
+  "file": "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/json_reader.cpp",
+  "output": "CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o"
+}
+]

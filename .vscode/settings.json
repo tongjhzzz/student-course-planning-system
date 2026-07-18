@@ -1,2 +1,6 @@
 {
+    "cmake.cmakePath": "/Users/daxian/Qt/Tools/CMake/CMake.app/Contents/bin/cmake",
+    "cmake.configureSettings": {
+        "Qt6_DIR": "/Users/daxian/Qt/6.11.1/macos/lib/cmake/Qt6"
+    }
 }

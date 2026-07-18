@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o.d"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o"

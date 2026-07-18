@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/course_repository.cpp" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o" "gcc" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o.d"
   "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/csv_reader.cpp" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o" "gcc" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o.d"
+  "/Users/daxian/个人项目/学生版-智能课程规划系统/src/data/json_reader.cpp" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o" "gcc" "CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o.d"
   "/Users/daxian/个人项目/学生版-智能课程规划系统/src/main.cpp" "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o" "gcc" "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o.d"
   "/Users/daxian/个人项目/学生版-智能课程规划系统/src/model/course.cpp" "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o" "gcc" "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o.d"
   )

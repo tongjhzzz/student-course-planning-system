@@ -177,6 +177,30 @@ src/data/csv_reader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.s
 .PHONY : src/data/csv_reader.cpp.s
 
+src/data/json_reader.o: src/data/json_reader.cpp.o
+.PHONY : src/data/json_reader.o
+
+# target to build an object file
+src/data/json_reader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o
+.PHONY : src/data/json_reader.cpp.o
+
+src/data/json_reader.i: src/data/json_reader.cpp.i
+.PHONY : src/data/json_reader.i
+
+# target to preprocess a source file
+src/data/json_reader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.i
+.PHONY : src/data/json_reader.cpp.i
+
+src/data/json_reader.s: src/data/json_reader.cpp.s
+.PHONY : src/data/json_reader.s
+
+# target to generate assembly for a file
+src/data/json_reader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.s
+.PHONY : src/data/json_reader.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -240,6 +264,9 @@ help:
 	@echo "... src/data/csv_reader.o"
 	@echo "... src/data/csv_reader.i"
 	@echo "... src/data/csv_reader.s"
+	@echo "... src/data/json_reader.o"
+	@echo "... src/data/json_reader.i"
+	@echo "... src/data/json_reader.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
