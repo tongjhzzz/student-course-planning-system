@@ -6891,6 +6891,7 @@ CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: /Users/daxian/
   /Library/Developer/CommandLineTools/usr/lib/clang/21/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/21/include/stdint.h \
   /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/QDir \
+  /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/QFileInfo \
   /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/q17memory.h \
   /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/q20bit.h \
   /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/q20functional.h \
@@ -7065,6 +7066,7 @@ CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: /Users/daxian/
   /Users/daxian/Qt/6.11.1/macos/lib/QtGui.framework/Headers/qtransform.h \
   /Users/daxian/Qt/6.11.1/macos/lib/QtGui.framework/Headers/qvalidator.h \
   /Users/daxian/Qt/6.11.1/macos/lib/QtGui.framework/Headers/qwindowdefs.h \
+  /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QAbstractItemView \
   /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QComboBox \
   /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QHBoxLayout \
   /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QHeaderView \
@@ -7157,6 +7159,8 @@ CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: /Users/daxian/
 /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QHBoxLayout:
 
 /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QComboBox:
+
+/Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QAbstractItemView:
 
 /Users/daxian/Qt/6.11.1/macos/lib/QtGui.framework/Headers/qtextformat.h:
 
@@ -9331,6 +9335,8 @@ CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: /Users/daxian/
 /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/_ctype.h:
 
 /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Headers/QTabWidget:
+
+/Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Headers/QFileInfo:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/c++/v1/__algorithm/fill.h:
 
