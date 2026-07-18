@@ -150,9 +150,9 @@ struct PlacementState
     {
     }
 
-    const CourseRepository& repository;
-    const ScheduleConstraints& constraints;
-    ScheduleResult result;
+    const CourseRepository& repository;// 课程数据库
+    const ScheduleConstraints& constraints;// 排课约束
+    ScheduleResult result;// 正在填充的排课结果
     std::unordered_map<std::string, int> placedTermById; // 课程 ID -> 已排学期
 
     // 尝试把课程排到不早于 earliestTerm 的某个学期。
