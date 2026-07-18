@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 add_executable(IntelligentCoursePlanner
     src/main.cpp
@@ -14,6 +14,13 @@ add_executable(IntelligentCoursePlanner
     src/data/course_repository.cpp
     src/data/csv_reader.cpp
     src/data/json_reader.cpp
+    src/algorithm/scheduler.cpp
+    src/service/planning_service.cpp
+    src/ui/main_window.cpp
 )
 
-target_link_libraries(IntelligentCoursePlanner PRIVATE Qt6::Core)
+target_compile_definitions(IntelligentCoursePlanner PRIVATE
+    PROJECT_SOURCE_DIRECTORY="${CMAKE_SOURCE_DIR}"
+)
+
+target_link_libraries(IntelligentCoursePlanner PRIVATE Qt6::Core Qt6::Widgets)

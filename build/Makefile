@@ -129,6 +129,30 @@ IntelligentCoursePlanner/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/build
 .PHONY : IntelligentCoursePlanner/fast
 
+src/algorithm/scheduler.o: src/algorithm/scheduler.cpp.o
+.PHONY : src/algorithm/scheduler.o
+
+# target to build an object file
+src/algorithm/scheduler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o
+.PHONY : src/algorithm/scheduler.cpp.o
+
+src/algorithm/scheduler.i: src/algorithm/scheduler.cpp.i
+.PHONY : src/algorithm/scheduler.i
+
+# target to preprocess a source file
+src/algorithm/scheduler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.i
+.PHONY : src/algorithm/scheduler.cpp.i
+
+src/algorithm/scheduler.s: src/algorithm/scheduler.cpp.s
+.PHONY : src/algorithm/scheduler.s
+
+# target to generate assembly for a file
+src/algorithm/scheduler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.s
+.PHONY : src/algorithm/scheduler.cpp.s
+
 src/data/course_repository.o: src/data/course_repository.cpp.o
 .PHONY : src/data/course_repository.o
 
@@ -249,6 +273,54 @@ src/model/course.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.s
 .PHONY : src/model/course.cpp.s
 
+src/service/planning_service.o: src/service/planning_service.cpp.o
+.PHONY : src/service/planning_service.o
+
+# target to build an object file
+src/service/planning_service.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o
+.PHONY : src/service/planning_service.cpp.o
+
+src/service/planning_service.i: src/service/planning_service.cpp.i
+.PHONY : src/service/planning_service.i
+
+# target to preprocess a source file
+src/service/planning_service.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.i
+.PHONY : src/service/planning_service.cpp.i
+
+src/service/planning_service.s: src/service/planning_service.cpp.s
+.PHONY : src/service/planning_service.s
+
+# target to generate assembly for a file
+src/service/planning_service.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.s
+.PHONY : src/service/planning_service.cpp.s
+
+src/ui/main_window.o: src/ui/main_window.cpp.o
+.PHONY : src/ui/main_window.o
+
+# target to build an object file
+src/ui/main_window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o
+.PHONY : src/ui/main_window.cpp.o
+
+src/ui/main_window.i: src/ui/main_window.cpp.i
+.PHONY : src/ui/main_window.i
+
+# target to preprocess a source file
+src/ui/main_window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.i
+.PHONY : src/ui/main_window.cpp.i
+
+src/ui/main_window.s: src/ui/main_window.cpp.s
+.PHONY : src/ui/main_window.s
+
+# target to generate assembly for a file
+src/ui/main_window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/IntelligentCoursePlanner.dir/build.make CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.s
+.PHONY : src/ui/main_window.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -258,6 +330,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... IntelligentCoursePlanner"
+	@echo "... src/algorithm/scheduler.o"
+	@echo "... src/algorithm/scheduler.i"
+	@echo "... src/algorithm/scheduler.s"
 	@echo "... src/data/course_repository.o"
 	@echo "... src/data/course_repository.i"
 	@echo "... src/data/course_repository.s"
@@ -273,6 +348,12 @@ help:
 	@echo "... src/model/course.o"
 	@echo "... src/model/course.i"
 	@echo "... src/model/course.s"
+	@echo "... src/service/planning_service.o"
+	@echo "... src/service/planning_service.i"
+	@echo "... src/service/planning_service.s"
+	@echo "... src/ui/main_window.o"
+	@echo "... src/ui/main_window.i"
+	@echo "... src/ui/main_window.s"
 .PHONY : help
 
 

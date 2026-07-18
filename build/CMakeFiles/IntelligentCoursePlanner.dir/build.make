@@ -139,13 +139,58 @@ CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/daxian/个人项目/学生版-智能课程规划系统/src/data/json_reader.cpp -o CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.s
 
+CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/flags.make
+CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o: /Users/daxian/个人项目/学生版-智能课程规划系统/src/algorithm/scheduler.cpp
+CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o -MF CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o.d -o CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/algorithm/scheduler.cpp
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/daxian/个人项目/学生版-智能课程规划系统/src/algorithm/scheduler.cpp > CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.i
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/daxian/个人项目/学生版-智能课程规划系统/src/algorithm/scheduler.cpp -o CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.s
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/flags.make
+CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o: /Users/daxian/个人项目/学生版-智能课程规划系统/src/service/planning_service.cpp
+CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o -MF CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o.d -o CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/service/planning_service.cpp
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/daxian/个人项目/学生版-智能课程规划系统/src/service/planning_service.cpp > CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.i
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/daxian/个人项目/学生版-智能课程规划系统/src/service/planning_service.cpp -o CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.s
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/flags.make
+CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: /Users/daxian/个人项目/学生版-智能课程规划系统/src/ui/main_window.cpp
+CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o: CMakeFiles/IntelligentCoursePlanner.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o -MF CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o.d -o CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o -c /Users/daxian/个人项目/学生版-智能课程规划系统/src/ui/main_window.cpp
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/daxian/个人项目/学生版-智能课程规划系统/src/ui/main_window.cpp > CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.i
+
+CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/daxian/个人项目/学生版-智能课程规划系统/src/ui/main_window.cpp -o CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.s
+
 # Object files for target IntelligentCoursePlanner
 IntelligentCoursePlanner_OBJECTS = \
 "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o" \
 "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o" \
 "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o" \
 "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o" \
-"CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o"
+"CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o" \
+"CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o" \
+"CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o" \
+"CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o"
 
 # External object files for target IntelligentCoursePlanner
 IntelligentCoursePlanner_EXTERNAL_OBJECTS =
@@ -155,10 +200,15 @@ IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/model/cour
 IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o
 IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o
 IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/data/json_reader.cpp.o
+IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o
+IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o
+IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o
 IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/build.make
+IntelligentCoursePlanner: /Users/daxian/Qt/6.11.1/macos/lib/QtWidgets.framework/Versions/A/QtWidgets
+IntelligentCoursePlanner: /Users/daxian/Qt/6.11.1/macos/lib/QtGui.framework/Versions/A/QtGui
 IntelligentCoursePlanner: /Users/daxian/Qt/6.11.1/macos/lib/QtCore.framework/Versions/A/QtCore
 IntelligentCoursePlanner: CMakeFiles/IntelligentCoursePlanner.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable IntelligentCoursePlanner"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable IntelligentCoursePlanner"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/IntelligentCoursePlanner.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

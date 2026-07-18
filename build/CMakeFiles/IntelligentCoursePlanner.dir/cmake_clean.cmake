@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/algorithm/scheduler.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/course_repository.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/data/csv_reader.cpp.o"
@@ -9,6 +11,10 @@ file(REMOVE_RECURSE
   "CMakeFiles/IntelligentCoursePlanner.dir/src/main.cpp.o.d"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o"
   "CMakeFiles/IntelligentCoursePlanner.dir/src/model/course.cpp.o.d"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/service/planning_service.cpp.o.d"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o"
+  "CMakeFiles/IntelligentCoursePlanner.dir/src/ui/main_window.cpp.o.d"
   "IntelligentCoursePlanner"
   "IntelligentCoursePlanner.pdb"
 )
