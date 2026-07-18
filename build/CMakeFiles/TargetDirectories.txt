@@ -1,0 +1,3 @@
+/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles/IntelligentCoursePlanner.dir
+/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles/edit_cache.dir
+/Users/daxian/个人项目/学生版-智能课程规划系统/build/CMakeFiles/rebuild_cache.dir

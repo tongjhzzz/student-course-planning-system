@@ -6,7 +6,7 @@
 bool CsvReader::loadCourseInfo(const std::string& filePath,
                                CourseRepository& repository,
                                std::string& errorMessage)
-{
+{// 读取 course_info.csv，把每一行课程数据转换成 Course 和 CourseSection 对象，然后保存进 CourseRepository
     std::ifstream file(filePath);
     if (!file.is_open()) {
         errorMessage = "无法打开课程信息文件：" + filePath;
@@ -14,12 +14,12 @@ bool CsvReader::loadCourseInfo(const std::string& filePath,
     }
 
     std::string line;
-    if (!std::getline(file, line)) {
+    if (!std::getline(file, line)) {// 先读表头
         errorMessage = "课程信息文件为空：" + filePath;
         return false;
     }
 
-    std::vector<std::string> header = parseCsvLine(line);
+    std::vector<std::string> header = parseCsvLine(line);// parseCsvLine() 会按照 CSV 规则，把一行文本拆成多列
     std::unordered_map<std::string, int> headerIndex;
     const std::vector<std::string> requiredColumns = {
         "course_basic_ID", "course_sp_ID", "course_name", "department",
@@ -114,11 +114,11 @@ bool CsvReader::loadCourseTime(const std::string& filePath,
         return false;
     }
 
-    std::vector<std::string> header = parseCsvLine(line);
+    std::vector<std::string> header = parseCsvLine(line);// 自动分行
     std::unordered_map<std::string, int> headerIndex;
     const std::vector<std::string> requiredColumns = {
         "course_basic_ID", "course_sp_ID", "day", "beg", "last"
-    };
+    };// 只读入需要读入的表头，其他的即使存在也不读
 
     if (!buildHeaderIndex(header, requiredColumns, headerIndex, errorMessage)) {
         return false;
@@ -168,14 +168,14 @@ bool CsvReader::loadCourseTime(const std::string& filePath,
 }
 
 std::vector<std::string> CsvReader::parseCsvLine(const std::string& line)
-{
-    std::vector<std::string> fields;
-    std::string currentField;
-    bool insideQuotes = false;
+{// 把CSV文件中的一整行文字，拆成多个字段
+    std::vector<std::string> fields;// 用来保存拆出来的每一列
+    std::string currentField;// 用来保存当前读取的字段
+    bool insideQuotes = false;// 用来记录当前是否在引号内部
 
     for (std::size_t index = 0; index < line.size(); ++index) {
         char character = line[index];
-
+        // 第一个 " 表示进入引号内容；最后一个 " 表示离开引号内容
         if (character == '"') {
             // CSV 中连续两个双引号表示字段内容中的一个双引号。
             if (insideQuotes && index + 1 < line.size() && line[index + 1] == '"') {
@@ -196,7 +196,7 @@ std::vector<std::string> CsvReader::parseCsvLine(const std::string& line)
     return fields;
 }
 
-std::string CsvReader::trim(const std::string& text)
+std::string CsvReader::trim(const std::string& text)// 用于删除一个字符串开头和结尾处多余的空白字符
 {
     const std::string whitespace = " \t\r\n";
     const std::size_t first = text.find_first_not_of(whitespace);
@@ -209,7 +209,7 @@ std::string CsvReader::trim(const std::string& text)
     return text.substr(first, last - first + 1);
 }
 
-std::vector<std::string> CsvReader::splitPrerequisiteIds(
+std::vector<std::string> CsvReader::splitPrerequisiteIds(// 将 "A;B;C" 拆分为 {"A", "B", "C"}。
     const std::string& prerequisiteText)
 {
     std::vector<std::string> prerequisiteIds;
@@ -240,7 +240,7 @@ int CsvReader::dayToNumber(const std::string& dayText)
     return -1;
 }
 
-bool CsvReader::buildHeaderIndex(
+bool CsvReader::buildHeaderIndex(// 建立“列名 -> 列号”的对应关系，并检查必须字段是否存在。
     const std::vector<std::string>& header,
     const std::vector<std::string>& requiredColumns,
     std::unordered_map<std::string, int>& headerIndex,
@@ -272,6 +272,7 @@ bool CsvReader::buildHeaderIndex(
     return true;
 }
 
+// 安全取得某一列的文本；列不存在或行数据不完整时返回空字符串。
 std::string CsvReader::getField(
     const std::vector<std::string>& fields,
     const std::unordered_map<std::string, int>& headerIndex,
