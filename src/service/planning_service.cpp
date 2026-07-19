@@ -43,6 +43,8 @@ ScheduleConstraints PlanningService::toScheduleConstraints(
     // PlanningConstraints 的下标 0~7 对应第 1~8 学期；
     // ScheduleConstraints 的下标 1~8 对应第 1~8 学期。
     for (int term = 1; term <= 8; ++term) {
+        scheduleConstraints.minCreditPerTerm[term] =
+            constraints.minCreditPerSemester[term - 1];
         scheduleConstraints.maxCreditPerTerm[term] =
             constraints.maxCreditPerSemester[term - 1];
     }

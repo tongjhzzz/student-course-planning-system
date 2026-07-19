@@ -13,6 +13,7 @@ struct ScheduleConstraints
     std::vector<std::string> requiredCourseIds;     // 必须全部安排的课程 ID
     std::vector<std::string> electiveCandidateIds;  // 选修候选池的课程 ID
     std::array<double, 9> maxCreditPerTerm{};       // 每学期学分上限，下标 1~8
+    std::array<double, 9> minCreditPerTerm{};       // 每学期学分下限，下标 1~8，0 表示无要求
     double minTotalCredit = 0.0;                    // 八学期总学分下限
     double electiveMinCredit = 0.0;                 // 专业选修课学分下限
 };
