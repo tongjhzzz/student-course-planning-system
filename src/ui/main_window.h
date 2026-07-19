@@ -9,11 +9,14 @@
 #include <string>
 
 class QComboBox;
+class QDoubleSpinBox;
 class QLabel;
+class QLineEdit;
 class QPushButton;
 class QTableWidget;
 class QTextEdit;
 class QTabWidget;
+class QWidget;
 class ScheduleResult;
 
 // 智能课程规划系统的主窗口。
@@ -25,6 +28,11 @@ public:
 private:
     void createInterface();
     void createTimetableTable(QTableWidget* table);
+    void createCourseQueryPage();
+    void loadCourseData();
+    void refreshCourseQueryOptions();
+    void queryCourses();
+    void resetCourseQuery();
     void loadProfileFiles();
     void generateSchedule();
     void showScheduleResult(const ScheduleResult& result);
@@ -34,6 +42,7 @@ private:
     static QString formatCourseText(const Course& course,
                                     const CourseSection& section,
                                     const TimeSlot& slot);
+    static QString formatSectionTimeSlots(const CourseSection& section);
     static QString courseColor(const std::string& courseId);
 
     QComboBox* profileComboBox = nullptr;
@@ -44,6 +53,18 @@ private:
     QTabWidget* termTabWidget = nullptr;
     QTableWidget* tablesByTerm[8]{};
     QTextEdit* problemsTextEdit = nullptr;
+
+    QWidget* courseQueryPage = nullptr;
+    QLineEdit* courseKeywordEdit = nullptr;
+    QComboBox* categoryComboBox = nullptr;
+    QComboBox* departmentComboBox = nullptr;
+    QComboBox* semesterComboBox = nullptr;
+    QDoubleSpinBox* minCreditSpinBox = nullptr;
+    QDoubleSpinBox* maxCreditSpinBox = nullptr;
+    QPushButton* queryButton = nullptr;
+    QPushButton* resetQueryButton = nullptr;
+    QLabel* queryCountLabel = nullptr;
+    QTableWidget* courseQueryTable = nullptr;
 
     CourseRepository repository;
     PlanningConstraints constraints;

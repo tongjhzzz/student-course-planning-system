@@ -1,24 +1,31 @@
 #include "main_window.h"
 
 #include "../algorithm/scheduler.h"
+#include "../data/csv_reader.h"
 #include "../service/planning_service.h"
 
 #include <QAbstractItemView>
 #include <QComboBox>
+#include <QDoubleSpinBox>
 #include <QDir>
 #include <QFileInfo>
+#include <QGridLayout>
 #include <QHeaderView>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QLineEdit>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTableWidget>
+#include <QTableWidgetItem>
 #include <QTabWidget>
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
 
 #include <algorithm>
+#include <set>
+#include <vector>
 
 namespace
 {
@@ -67,10 +74,43 @@ MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
 {
     createInterface();
+    loadCourseData();
     loadProfileFiles();
 
     setWindowTitle("智能课程规划系统");
     resize(1320, 930);
+}
+
+void MainWindow::loadCourseData()
+{
+    const std::string dataDirectory = projectDirectory() + "/data";
+    const std::string courseInfoPath = dataDirectory + "/course_info.csv";
+    const std::string courseTimePath = dataDirectory + "/course_time.csv";
+
+    std::string errorMessage;
+
+    repository.clear();
+
+    if (!CsvReader::loadCourseInfo(courseInfoPath, repository, errorMessage)
+        || !CsvReader::loadCourseTime(courseTimePath, repository, errorMessage)) {
+        statusLabel->setText(
+            "课程数据加载失败：" + QString::fromStdString(errorMessage));
+        dataSummaryLabel->setText("课程数据尚未成功加载。");
+        return;
+    }
+
+    dataSummaryLabel->setText(
+        "已加载课程数据：基础课程 "
+        + QString::number(repository.courseCount())
+        + " 门，教学班 "
+        + QString::number(repository.sectionCount())
+        + " 个。");
+
+    refreshCourseQueryOptions();
+    queryCourses();
+
+    statusLabel->setText(
+        "课程数据已加载。请选择培养方案生成规划，或前往课程查询页查询课程。");
 }
 
 void MainWindow::createInterface()
@@ -110,6 +150,9 @@ void MainWindow::createInterface()
         termTabWidget->addTab(table, "第 " + QString::number(term) + " 学期");
     }
 
+    createCourseQueryPage();
+    termTabWidget->addTab(courseQueryPage, "课程查询");
+
     mainLayout->addWidget(termTabWidget, 1);
 
     QLabel* problemsLabel = new QLabel("规划问题或提示：", this);
@@ -123,6 +166,233 @@ void MainWindow::createInterface()
 
     connect(generateButton, &QPushButton::clicked,
             this, [this]() { generateSchedule(); });
+}
+
+void MainWindow::createCourseQueryPage()
+{
+    courseQueryPage = new QWidget(this);
+    QVBoxLayout* pageLayout = new QVBoxLayout(courseQueryPage);
+    pageLayout->setContentsMargins(10, 10, 10, 10);
+    pageLayout->setSpacing(8);
+
+    QGridLayout* filterLayout = new QGridLayout;
+    filterLayout->setHorizontalSpacing(8);
+    filterLayout->setVerticalSpacing(6);
+
+    courseKeywordEdit = new QLineEdit(courseQueryPage);
+    courseKeywordEdit->setPlaceholderText("输入课程名称或课程编号的一部分");
+
+    categoryComboBox = new QComboBox(courseQueryPage);
+    departmentComboBox = new QComboBox(courseQueryPage);
+    semesterComboBox = new QComboBox(courseQueryPage);
+
+    minCreditSpinBox = new QDoubleSpinBox(courseQueryPage);
+    minCreditSpinBox->setRange(0.0, 30.0);
+    minCreditSpinBox->setDecimals(1);
+    minCreditSpinBox->setSingleStep(0.5);
+    minCreditSpinBox->setPrefix("最低 ");
+    minCreditSpinBox->setSuffix(" 学分");
+
+    maxCreditSpinBox = new QDoubleSpinBox(courseQueryPage);
+    maxCreditSpinBox->setRange(0.0, 30.0);
+    maxCreditSpinBox->setDecimals(1);
+    maxCreditSpinBox->setSingleStep(0.5);
+    maxCreditSpinBox->setPrefix("最高 ");
+    maxCreditSpinBox->setSuffix(" 学分");
+    maxCreditSpinBox->setValue(30.0);
+
+    queryButton = new QPushButton("查询", courseQueryPage);
+    resetQueryButton = new QPushButton("重置", courseQueryPage);
+
+    filterLayout->addWidget(new QLabel("课程名称/编号：", courseQueryPage), 0, 0);
+    filterLayout->addWidget(courseKeywordEdit, 0, 1, 1, 3);
+    filterLayout->addWidget(new QLabel("课程类别：", courseQueryPage), 0, 4);
+    filterLayout->addWidget(categoryComboBox, 0, 5);
+    filterLayout->addWidget(new QLabel("开课院系：", courseQueryPage), 1, 0);
+    filterLayout->addWidget(departmentComboBox, 1, 1);
+    filterLayout->addWidget(new QLabel("开课季节：", courseQueryPage), 1, 2);
+    filterLayout->addWidget(semesterComboBox, 1, 3);
+    filterLayout->addWidget(minCreditSpinBox, 1, 4);
+    filterLayout->addWidget(maxCreditSpinBox, 1, 5);
+    filterLayout->addWidget(queryButton, 0, 6);
+    filterLayout->addWidget(resetQueryButton, 1, 6);
+
+    pageLayout->addLayout(filterLayout);
+
+    queryCountLabel = new QLabel("课程数据加载后可查询全部教学班。", courseQueryPage);
+    pageLayout->addWidget(queryCountLabel);
+
+    courseQueryTable = new QTableWidget(courseQueryPage);
+    const QStringList headers = {
+        "课程编号", "课程名称", "教学班", "类别", "学分", "开课院系",
+        "开课季节", "教师", "教室", "上课周次", "上课时间"
+    };
+    courseQueryTable->setColumnCount(headers.size());
+    courseQueryTable->setHorizontalHeaderLabels(headers);
+    courseQueryTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    courseQueryTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    courseQueryTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    courseQueryTable->setAlternatingRowColors(true);
+    courseQueryTable->setWordWrap(false);
+    courseQueryTable->verticalHeader()->setVisible(false);
+    courseQueryTable->horizontalHeader()->setStretchLastSection(true);
+    courseQueryTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    courseQueryTable->setStyleSheet(
+        "QTableWidget { gridline-color: #AAB5BE; font-size: 12px; }"
+        "QHeaderView::section { background-color: #E5EDF2; padding: 6px; "
+        "border: 1px solid #9AA7B0; font-weight: bold; }");
+
+    pageLayout->addWidget(courseQueryTable, 1);
+
+    connect(queryButton, &QPushButton::clicked,
+            this, [this]() { queryCourses(); });
+    connect(resetQueryButton, &QPushButton::clicked,
+            this, [this]() { resetCourseQuery(); });
+    connect(courseKeywordEdit, &QLineEdit::returnPressed,
+            this, [this]() { queryCourses(); });
+}
+
+void MainWindow::refreshCourseQueryOptions()
+{
+    if (categoryComboBox == nullptr || departmentComboBox == nullptr
+        || semesterComboBox == nullptr) {
+        return;
+    }
+
+    std::set<std::string> categories;
+    std::set<std::string> departments;
+    std::set<std::string> semesters;
+
+    for (const Course* course : repository.allCourses()) {
+        categories.insert(course->category);
+        departments.insert(course->department);
+        semesters.insert(course->semester);
+    }
+
+    categoryComboBox->clear();
+    departmentComboBox->clear();
+    semesterComboBox->clear();
+
+    categoryComboBox->addItem("全部", "");
+    departmentComboBox->addItem("全部", "");
+    semesterComboBox->addItem("全部", "");
+
+    for (const std::string& category : categories) {
+        categoryComboBox->addItem(QString::fromStdString(category),
+                                  QString::fromStdString(category));
+    }
+    for (const std::string& department : departments) {
+        departmentComboBox->addItem(QString::fromStdString(department),
+                                    QString::fromStdString(department));
+    }
+    for (const std::string& semester : semesters) {
+        semesterComboBox->addItem(QString::fromStdString(semester),
+                                  QString::fromStdString(semester));
+    }
+}
+
+void MainWindow::queryCourses()
+{
+    if (courseQueryTable == nullptr) {
+        return;
+    }
+
+    const QString keyword = courseKeywordEdit->text().trimmed();
+    const QString category = categoryComboBox->currentData().toString();
+    const QString department = departmentComboBox->currentData().toString();
+    const QString semester = semesterComboBox->currentData().toString();
+    const double minCredit = minCreditSpinBox->value();
+    const double maxCredit = maxCreditSpinBox->value();
+
+    courseQueryTable->setRowCount(0);
+
+    if (minCredit > maxCredit) {
+        queryCountLabel->setText("最低学分不能大于最高学分。请调整后重新查询。");
+        return;
+    }
+
+    std::vector<const Course*> courses = repository.allCourses();
+    std::sort(courses.begin(), courses.end(), [](const Course* left,
+                                                 const Course* right) {
+        return left->basicId < right->basicId;
+    });
+
+    int resultCount = 0;
+    for (const Course* course : courses) {
+        const QString courseId = QString::fromStdString(course->basicId);
+        const QString courseName = QString::fromStdString(course->name);
+        const QString searchableText = courseId + " " + courseName;
+
+        if (!keyword.isEmpty()
+            && !searchableText.contains(keyword, Qt::CaseInsensitive)) {
+            continue;
+        }
+        if (!category.isEmpty()
+            && category != QString::fromStdString(course->category)) {
+            continue;
+        }
+        if (!department.isEmpty()
+            && department != QString::fromStdString(course->department)) {
+            continue;
+        }
+        if (!semester.isEmpty()
+            && semester != QString::fromStdString(course->semester)) {
+            continue;
+        }
+        if (course->credit < minCredit || course->credit > maxCredit) {
+            continue;
+        }
+
+        const std::vector<CourseSection>* sections =
+            repository.findSections(course->basicId);
+        if (sections == nullptr || sections->empty()) {
+            continue;
+        }
+
+        for (const CourseSection& section : *sections) {
+            const int row = courseQueryTable->rowCount();
+            courseQueryTable->insertRow(row);
+
+            const QString weekText = "第 " + QString::number(course->beginWeek)
+                + "-" + QString::number(course->endWeek()) + " 周";
+            const QString values[] = {
+                courseId,
+                courseName,
+                QString::fromStdString(section.sectionId),
+                QString::fromStdString(course->category),
+                QString::number(course->credit, 'f', 1),
+                QString::fromStdString(course->department),
+                QString::fromStdString(course->semester),
+                QString::fromStdString(section.teacher),
+                QString::fromStdString(section.classroom),
+                weekText,
+                formatSectionTimeSlots(section)
+            };
+
+            for (int column = 0; column < 11; ++column) {
+                QTableWidgetItem* item = new QTableWidgetItem(values[column]);
+                item->setTextAlignment(column == 4 ? Qt::AlignCenter
+                                                   : Qt::AlignLeft | Qt::AlignVCenter);
+                courseQueryTable->setItem(row, column, item);
+            }
+
+            ++resultCount;
+        }
+    }
+
+    queryCountLabel->setText("共找到 " + QString::number(resultCount)
+                              + " 个符合条件的教学班。");
+}
+
+void MainWindow::resetCourseQuery()
+{
+    courseKeywordEdit->clear();
+    categoryComboBox->setCurrentIndex(0);
+    departmentComboBox->setCurrentIndex(0);
+    semesterComboBox->setCurrentIndex(0);
+    minCreditSpinBox->setValue(0.0);
+    maxCreditSpinBox->setValue(30.0);
+    queryCourses();
 }
 
 void MainWindow::createTimetableTable(QTableWidget* table)
@@ -328,6 +598,31 @@ QString MainWindow::formatCourseText(const Course& course,
         + "-" + QString::number(slot.endPeriod()) + " 节"
         + "\n" + QString::fromStdString(section.classroom)
         + "\n" + QString::fromStdString(section.teacher);
+}
+
+QString MainWindow::formatSectionTimeSlots(const CourseSection& section)
+{
+    const QStringList weekdayNames = {
+        "周一", "周二", "周三", "周四", "周五", "周六", "周日"
+    };
+
+    QStringList parts;
+    for (const TimeSlot& slot : section.timeSlots) {
+        if (slot.day < 0 || slot.day >= weekdayNames.size()
+            || slot.beginPeriod <= 0 || slot.duration <= 0) {
+            continue;
+        }
+
+        QString text = weekdayNames[slot.day] + " 第 "
+            + QString::number(slot.beginPeriod);
+        if (slot.duration > 1) {
+            text += "-" + QString::number(slot.endPeriod());
+        }
+        text += " 节";
+        parts.append(text);
+    }
+
+    return parts.join("；");
 }
 
 QString MainWindow::courseColor(const std::string& courseId)
