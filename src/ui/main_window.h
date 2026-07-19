@@ -7,7 +7,9 @@
 
 #include <QMainWindow>
 
+#include <array>
 #include <string>
+#include <vector>
 
 class QComboBox;
 class QDoubleSpinBox;
@@ -29,10 +31,18 @@ private:
     void createInterface();
     void createTimetableTable(QTableWidget* table);
     void createCourseQueryPage();
+    void createTimePreferencePage();
     void loadCourseData();
     void refreshCourseQueryOptions();
     void queryCourses();
     void resetCourseQuery();
+    void createTimePreferenceTable();
+    void toggleAvoidTimeSlot(int row, int column);
+    void updateTimePreferenceCell(int day, int period);
+    void updateTimePreferenceSummary();
+    void loadTimePreferences();
+    void saveTimePreferences();
+    void clearTimePreferences();
     void loadProfileFiles();
     void generateSchedule();
     void exportSchedule();
@@ -57,6 +67,12 @@ private:
     QTextEdit* problemsTextEdit = nullptr;
 
     QWidget* courseQueryPage = nullptr;
+
+    QWidget* timePreferencePage = nullptr;
+    QTableWidget* timePreferenceTable = nullptr;
+    QPushButton* saveTimePreferenceButton = nullptr;
+    QPushButton* clearTimePreferenceButton = nullptr;
+    QLabel* timePreferenceSummaryLabel = nullptr;
     QLineEdit* courseKeywordEdit = nullptr;
     QComboBox* categoryComboBox = nullptr;
     QComboBox* departmentComboBox = nullptr;
@@ -72,6 +88,9 @@ private:
     PlanningConstraints constraints;
     ScheduleResult currentScheduleResult;
     bool hasScheduleResult = false;
+
+    // 下标 [星期][节次 - 1]；true 表示用户希望尽量避开该时间。
+    std::array<std::array<bool, 13>, 7> avoidTimeSlots{};
 };
 
 #endif // MAIN_WINDOW_H

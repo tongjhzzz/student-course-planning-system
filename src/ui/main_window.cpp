@@ -2,6 +2,7 @@
 
 #include "../algorithm/scheduler.h"
 #include "../data/csv_reader.h"
+#include "../data/time_preference_storage.h"
 #include "../service/planning_service.h"
 #include "../output/schedule_exporter.h"
 
@@ -78,6 +79,7 @@ MainWindow::MainWindow(QWidget* parent)
     createInterface();
     loadCourseData();
     loadProfileFiles();
+    loadTimePreferences();
 
     setWindowTitle("智能课程规划系统");
     resize(1320, 930);
@@ -157,6 +159,9 @@ void MainWindow::createInterface()
 
     createCourseQueryPage();
     termTabWidget->addTab(courseQueryPage, "课程查询");
+
+    createTimePreferencePage();
+    termTabWidget->addTab(timePreferencePage, "时间偏好");
 
     mainLayout->addWidget(termTabWidget, 1);
 
@@ -400,6 +405,241 @@ void MainWindow::resetCourseQuery()
     minCreditSpinBox->setValue(0.0);
     maxCreditSpinBox->setValue(30.0);
     queryCourses();
+}
+
+void MainWindow::createTimePreferencePage()
+{
+    timePreferencePage = new QWidget(this);
+    QVBoxLayout* pageLayout = new QVBoxLayout(timePreferencePage);
+    pageLayout->setContentsMargins(10, 10, 10, 10);
+    pageLayout->setSpacing(8);
+
+    QLabel* descriptionLabel = new QLabel(
+        "点击课程表中的时间格，标记你希望尽量避开上课的时间。"
+        "红色格表示已选择。", timePreferencePage);
+    descriptionLabel->setWordWrap(true);
+    pageLayout->addWidget(descriptionLabel);
+
+    timePreferenceTable = new QTableWidget(timePreferencePage);
+    createTimePreferenceTable();
+    pageLayout->addWidget(timePreferenceTable, 1);
+
+    timePreferenceSummaryLabel = new QLabel(timePreferencePage);
+    pageLayout->addWidget(timePreferenceSummaryLabel);
+
+    QHBoxLayout* buttonLayout = new QHBoxLayout;
+    saveTimePreferenceButton = new QPushButton("保存时间偏好", timePreferencePage);
+    clearTimePreferenceButton = new QPushButton("清空已选时间", timePreferencePage);
+
+    buttonLayout->addWidget(saveTimePreferenceButton);
+    buttonLayout->addWidget(clearTimePreferenceButton);
+    buttonLayout->addStretch();
+    pageLayout->addLayout(buttonLayout);
+
+    connect(timePreferenceTable, &QTableWidget::cellClicked,
+            this, [this](int row, int column) {
+                toggleAvoidTimeSlot(row, column);
+            });
+    connect(saveTimePreferenceButton, &QPushButton::clicked,
+            this, [this]() { saveTimePreferences(); });
+    connect(clearTimePreferenceButton, &QPushButton::clicked,
+            this, [this]() { clearTimePreferences(); });
+
+    updateTimePreferenceSummary();
+}
+
+void MainWindow::createTimePreferenceTable()
+{
+    const QStringList headers = {
+        "时间", "周一", "周二", "周三", "周四", "周五", "周六", "周日"
+    };
+
+    timePreferenceTable->clearContents();
+    timePreferenceTable->setRowCount(kPeriodCount);
+    timePreferenceTable->setColumnCount(kColumnCount);
+    timePreferenceTable->setHorizontalHeaderLabels(headers);
+    timePreferenceTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    timePreferenceTable->setSelectionMode(QAbstractItemView::NoSelection);
+    timePreferenceTable->setFocusPolicy(Qt::NoFocus);
+    timePreferenceTable->setShowGrid(true);
+    timePreferenceTable->verticalHeader()->setVisible(false);
+    timePreferenceTable->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
+    timePreferenceTable->horizontalHeader()->setSectionResizeMode(
+        kTimeColumn, QHeaderView::Fixed);
+    timePreferenceTable->setColumnWidth(kTimeColumn, 125);
+
+    for (int column = kWeekdayStartColumn; column < kColumnCount; ++column) {
+        timePreferenceTable->horizontalHeader()->setSectionResizeMode(
+            column, QHeaderView::Stretch);
+    }
+
+    for (int row = 0; row < kPeriodCount; ++row) {
+        timePreferenceTable->setRowHeight(row, 48);
+
+        QTableWidgetItem* timeItem = new QTableWidgetItem(
+            "第 " + QString::number(row + 1) + " 节\n" + kPeriodTimes[row]);
+        timeItem->setTextAlignment(Qt::AlignCenter);
+        timeItem->setBackground(QColor("#E5EDF2"));
+        timePreferenceTable->setItem(row, kTimeColumn, timeItem);
+
+        for (int day = 0; day < 7; ++day) {
+            QTableWidgetItem* item = new QTableWidgetItem;
+            item->setTextAlignment(Qt::AlignCenter);
+            timePreferenceTable->setItem(row, day + kWeekdayStartColumn, item);
+            updateTimePreferenceCell(day, row + 1);
+        }
+    }
+
+    timePreferenceTable->setStyleSheet(
+        "QTableWidget {"
+        "gridline-color: #9AA7B0;"
+        "border: 1px solid #9AA7B0;"
+        "font-size: 12px;"
+        "}"
+        "QHeaderView::section {"
+        "background-color: #E5EDF2;"
+        "border: 1px solid #9AA7B0;"
+        "padding: 6px;"
+        "font-weight: bold;"
+        "}");
+}
+
+void MainWindow::toggleAvoidTimeSlot(int row, int column)
+{
+    // 第 0 列是时间说明，不能作为偏好设置。
+    if (row < 0 || row >= kPeriodCount || column < kWeekdayStartColumn
+        || column >= kColumnCount) {
+        return;
+    }
+
+    const int day = column - kWeekdayStartColumn;
+    const int period = row + 1;
+
+    avoidTimeSlots[day][row] = !avoidTimeSlots[day][row];
+    updateTimePreferenceCell(day, period);
+    updateTimePreferenceSummary();
+}
+
+void MainWindow::updateTimePreferenceCell(int day, int period)
+{
+    if (timePreferenceTable == nullptr || day < 0 || day >= 7
+        || period < 1 || period > kPeriodCount) {
+        return;
+    }
+
+    QTableWidgetItem* item = timePreferenceTable->item(
+        period - 1, day + kWeekdayStartColumn);
+    if (item == nullptr) {
+        return;
+    }
+
+    if (avoidTimeSlots[day][period - 1]) {
+        item->setText("尽量避开\n已选择");
+        item->setBackground(QColor("#F7C7C7"));
+        item->setToolTip("自动排课时应尽量避开这个时间。");
+    } else {
+        item->setText("可安排");
+        item->setBackground(QColor("#EAF4E3"));
+        item->setToolTip("点击后标记为尽量避开上课的时间。");
+    }
+}
+
+void MainWindow::updateTimePreferenceSummary()
+{
+    if (timePreferenceSummaryLabel == nullptr) {
+        return;
+    }
+
+    int selectedCount = 0;
+    for (const std::array<bool, 13>& periods : avoidTimeSlots) {
+        for (bool selected : periods) {
+            if (selected) {
+                ++selectedCount;
+            }
+        }
+    }
+
+    timePreferenceSummaryLabel->setText(
+        "当前已选择 " + QString::number(selectedCount)
+        + " 个尽量避开时间。当前版本会保存该偏好，"
+          "排课算法接入后将据此尽量避开这些时间。");
+}
+
+void MainWindow::loadTimePreferences()
+{
+    const std::string filePath = projectDirectory() + "/data/time_preference.json";
+    std::vector<TimePreferenceBlock> blocks;
+    std::string errorMessage;
+
+    if (!TimePreferenceStorage::loadAvoidTimeBlocks(filePath, blocks,
+                                                     errorMessage)) {
+        statusLabel->setText("读取时间偏好失败："
+                             + QString::fromStdString(errorMessage));
+        return;
+    }
+
+    avoidTimeSlots = {};
+    for (const TimePreferenceBlock& block : blocks) {
+        if (block.day >= 0 && block.day < 7 && block.beginPeriod >= 1
+            && block.beginPeriod <= kPeriodCount) {
+            avoidTimeSlots[block.day][block.beginPeriod - 1] = true;
+        }
+    }
+
+    for (int day = 0; day < 7; ++day) {
+        for (int period = 1; period <= kPeriodCount; ++period) {
+            updateTimePreferenceCell(day, period);
+        }
+    }
+    updateTimePreferenceSummary();
+}
+
+void MainWindow::saveTimePreferences()
+{
+    std::vector<TimePreferenceBlock> blocks;
+
+    for (int day = 0; day < 7; ++day) {
+        for (int period = 1; period <= kPeriodCount; ++period) {
+            if (!avoidTimeSlots[day][period - 1]) {
+                continue;
+            }
+
+            TimePreferenceBlock block;
+            block.day = day;
+            block.beginPeriod = period;
+            block.duration = 1;
+            block.hard = false;
+            block.reason = "用户设置的尽量避开时间";
+            blocks.push_back(block);
+        }
+    }
+
+    const std::string filePath = projectDirectory() + "/data/time_preference.json";
+    std::string errorMessage;
+
+    if (!TimePreferenceStorage::saveAvoidTimeBlocks(filePath, blocks,
+                                                     errorMessage)) {
+        QMessageBox::critical(this, "保存失败",
+                              QString::fromStdString(errorMessage));
+        return;
+    }
+
+    statusLabel->setText("时间偏好已保存到 data/time_preference.json。");
+    QMessageBox::information(this, "保存成功",
+                             "已保存尽量避开上课的时间偏好。");
+}
+
+void MainWindow::clearTimePreferences()
+{
+    avoidTimeSlots = {};
+
+    for (int day = 0; day < 7; ++day) {
+        for (int period = 1; period <= kPeriodCount; ++period) {
+            updateTimePreferenceCell(day, period);
+        }
+    }
+
+    updateTimePreferenceSummary();
 }
 
 void MainWindow::createTimetableTable(QTableWidget* table)
