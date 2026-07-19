@@ -328,6 +328,23 @@ bool ConstraintsLoader::loadFromJsonFile(const std::string& filePath,
         constraints.maxCreditPerTerm[term] = cap->numberValue;
     }
 
+    // 每学期学分下限是可选字段；缺省时保持 0，表示不做要求。
+    const JsonValue* mins = root.find("min_credit_per_semester");
+    if (mins != nullptr) {
+        if (mins->type != JsonValue::Type::Object) {
+            errorMessage = "min_credit_per_semester 必须是对象";
+            return false;
+        }
+        for (int term = 1; term <= 8; ++term) {
+            const JsonValue* min = mins->find(std::to_string(term));
+            if (min == nullptr || min->type != JsonValue::Type::Number) {
+                errorMessage = "min_credit_per_semester 缺少学期 " + std::to_string(term);
+                return false;
+            }
+            constraints.minCreditPerTerm[term] = min->numberValue;
+        }
+    }
+
     if (!readNumber(root, "min_total_credit",
                     constraints.minTotalCredit, errorMessage)) {
         return false;

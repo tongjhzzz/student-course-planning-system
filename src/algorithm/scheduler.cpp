@@ -201,6 +201,31 @@ struct PlacementState
         }
         return 0;
     }
+
+    // 尝试把课程排到指定的某一学期（用于补足该学期的最低学分）。
+    // 成功返回 true；课程该学期不开课、超学分上限或时间冲突时返回 false。
+    bool placeCourseInTerm(const Course& course, int term)
+    {
+        if (!course.isAvailableInTerm(term)) {
+            return false;
+        }
+        if (result.creditByTerm[term] + course.credit
+            > constraints.maxCreditPerTerm[term]) {
+            return false;
+        }
+
+        const CourseSection* section =
+            pickSection(repository, course, result.coursesByTerm[term]);
+        if (section == nullptr) {
+            return false;
+        }
+
+        PlannedCourse planned{&course, section, term};
+        result.coursesByTerm[term].push_back(planned);
+        result.creditByTerm[term] += course.credit;
+        placedTermById[course.basicId] = term;
+        return true;
+    }
 };
 
 } // namespace
@@ -387,7 +412,52 @@ ScheduleResult Scheduler::makeSchedule(const CourseRepository& repository,
                                   + formatCredit(totalNeed) + " 学分。");
     }
 
-    // ---------- 第四步：汇总统计并判定是否成功 ----------
+    // ---------- 第四步：检查每学期最低学分，不足时从剩余选修候选中补入 ----------
+    bool minTermCreditMet = true;
+    for (int term = 1; term <= 8; ++term) {
+        const double minCredit = constraints.minCreditPerTerm[term];
+        if (result.creditByTerm[term] >= minCredit) {
+            continue;
+        }
+
+        // 从未安排的选修候选课中挑选补入本学期的课程：
+        // 本学期可开、先修课已排在更早学期、不超学分上限、时间不与已排课程冲突。
+        for (const Course* course : electiveOrder) {
+            if (result.creditByTerm[term] >= minCredit) {
+                break; // 本学期学分已经补足
+            }
+            if (state.placedTermById.count(course->basicId) != 0) {
+                continue; // 已安排
+            }
+
+            bool prereqReady = true;
+            for (const std::string& prereq : course->prerequisiteIds) {
+                auto termIt = state.placedTermById.find(prereq);
+                if (termIt == state.placedTermById.end()
+                    || termIt->second >= term) {
+                    prereqReady = false;
+                    break;
+                }
+            }
+            if (!prereqReady) {
+                continue;
+            }
+
+            state.placeCourseInTerm(*course, term);
+            // 补不进去属于正常情况，继续尝试下一门候选课。
+        }
+
+        if (result.creditByTerm[term] < minCredit) {
+            minTermCreditMet = false;
+            result.problems.push_back("第 " + std::to_string(term)
+                                      + " 学期学分不足：当前 "
+                                      + formatCredit(result.creditByTerm[term])
+                                      + " 学分，要求至少 "
+                                      + formatCredit(minCredit) + " 学分。");
+        }
+    }
+
+    // ---------- 第五步：汇总统计并判定是否成功 ----------
     for (int term = 1; term <= 8; ++term) {
         for (const PlannedCourse& planned : result.coursesByTerm[term]) {
             result.totalCredit += planned.course->credit;
@@ -402,6 +472,7 @@ ScheduleResult Scheduler::makeSchedule(const CourseRepository& repository,
     result.success = missingRequiredCount == 0
                      && unplacedRequiredCount == 0
                      && electiveNeed <= 0.0
-                     && totalNeed <= 0.0;
+                     && totalNeed <= 0.0
+                     && minTermCreditMet;
     return result;
 }

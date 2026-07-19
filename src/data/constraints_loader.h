@@ -15,6 +15,7 @@ public:
     //   target_course_scope.required_course_basic_IDs
     //   target_course_scope.elective_candidate_course_basic_IDs
     //   max_credit_per_semester（"1"~"8"）
+    //   min_credit_per_semester（"1"~"8"，可选，缺省表示无每学期学分下限）
     //   min_total_credit
     //   elective_min_credit
     // 失败时返回 false，并把原因写入 errorMessage。

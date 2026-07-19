@@ -194,6 +194,16 @@
     "7": 40,
     "8": 40
   },
+  "min_credit_per_semester": {
+    "1": 16,
+    "2": 16,
+    "3": 16,
+    "4": 16,
+    "5": 16,
+    "6": 16,
+    "7": 16,
+    "8": 16
+  },
   "min_total_credit": 150,
   "required_rule": {
     "type": "all_courses_in_required_course_basic_IDs",
