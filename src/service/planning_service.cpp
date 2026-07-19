@@ -33,21 +33,41 @@ bool PlanningService::loadPlanningData(const std::string& courseInfoPath,
 ScheduleConstraints PlanningService::toScheduleConstraints(
     const PlanningConstraints& constraints)
 {
+    return toScheduleConstraints(constraints, {}, {});
+}
+
+ScheduleConstraints PlanningService::toScheduleConstraints(
+    const PlanningConstraints& profileConstraints,
+    const std::vector<TimePreferenceBlock>& userAvoidTimeBlocks,
+    const std::vector<ManualCourseSelection>& manualSelections)
+{
     ScheduleConstraints scheduleConstraints;
-    scheduleConstraints.requiredCourseIds = constraints.requiredCourseIds;
+    scheduleConstraints.requiredCourseIds =
+        profileConstraints.requiredCourseIds;
     scheduleConstraints.electiveCandidateIds =
-        constraints.electiveCandidateCourseIds;
-    scheduleConstraints.minTotalCredit = constraints.minTotalCredit;
-    scheduleConstraints.electiveMinCredit = constraints.electiveMinCredit;
+        profileConstraints.electiveCandidateCourseIds;
+    scheduleConstraints.minTotalCredit = profileConstraints.minTotalCredit;
+    scheduleConstraints.electiveMinCredit = profileConstraints.electiveMinCredit;
 
     // PlanningConstraints 的下标 0~7 对应第 1~8 学期；
     // ScheduleConstraints 的下标 1~8 对应第 1~8 学期。
     for (int term = 1; term <= 8; ++term) {
         scheduleConstraints.minCreditPerTerm[term] =
-            constraints.minCreditPerSemester[term - 1];
+            profileConstraints.minCreditPerSemester[term - 1];
         scheduleConstraints.maxCreditPerTerm[term] =
-            constraints.maxCreditPerSemester[term - 1];
+            profileConstraints.maxCreditPerSemester[term - 1];
     }
+
+    // 先加入培养方案自身的时间偏好，
+    // 再合并用户在界面中选择的时间偏好。
+    scheduleConstraints.avoidTimeBlocks = profileConstraints.avoidTimeBlocks;
+    scheduleConstraints.avoidTimeBlocks.insert(
+        scheduleConstraints.avoidTimeBlocks.end(),
+        userAvoidTimeBlocks.begin(),
+        userAvoidTimeBlocks.end());
+
+    // 传入用户手动选课。
+    scheduleConstraints.manualSelections = manualSelections;
 
     return scheduleConstraints;
 }
@@ -56,8 +76,19 @@ ScheduleResult PlanningService::createSchedule(
     const CourseRepository& repository,
     const PlanningConstraints& constraints)
 {
+    return createSchedule(repository, constraints, {}, {});
+}
+
+ScheduleResult PlanningService::createSchedule(
+    const CourseRepository& repository,
+    const PlanningConstraints& profileConstraints,
+    const std::vector<TimePreferenceBlock>& userAvoidTimeBlocks,
+    const std::vector<ManualCourseSelection>& manualSelections)
+{
     const ScheduleConstraints scheduleConstraints =
-        toScheduleConstraints(constraints);
+        toScheduleConstraints(profileConstraints,
+                              userAvoidTimeBlocks,
+                              manualSelections);
 
     return Scheduler::makeSchedule(repository, scheduleConstraints);
 }

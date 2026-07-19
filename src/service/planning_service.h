@@ -6,6 +6,7 @@
 #include "../model/planning_constraints.h"
 
 #include <string>
+#include <vector>
 
 // 负责把数据读取模块和排课算法模块连接起来。
 class PlanningService
@@ -24,10 +25,24 @@ public:
     static ScheduleConstraints toScheduleConstraints(
         const PlanningConstraints& constraints);
 
+    // 在培养方案约束的基础上，合并用户在界面中设置的时间偏好和手动选课，
+    // 转换为排课算法使用的约束结构。
+    static ScheduleConstraints toScheduleConstraints(
+        const PlanningConstraints& profileConstraints,
+        const std::vector<TimePreferenceBlock>& userAvoidTimeBlocks,
+        const std::vector<ManualCourseSelection>& manualSelections);
+
     // 根据已加载的数据生成八学期课程规划。
     static ScheduleResult createSchedule(
         const CourseRepository& repository,
         const PlanningConstraints& constraints);
+
+    // 根据已加载的数据、用户时间偏好和手动选课生成八学期课程规划。
+    static ScheduleResult createSchedule(
+        const CourseRepository& repository,
+        const PlanningConstraints& profileConstraints,
+        const std::vector<TimePreferenceBlock>& userAvoidTimeBlocks,
+        const std::vector<ManualCourseSelection>& manualSelections);
 };
 
 #endif // PLANNING_SERVICE_H

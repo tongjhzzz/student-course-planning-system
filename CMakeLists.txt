@@ -27,3 +27,16 @@ target_compile_definitions(IntelligentCoursePlanner PRIVATE
 )
 
 target_link_libraries(IntelligentCoursePlanner PRIVATE Qt6::Core Qt6::Widgets)
+
+# 排课算法单元测试（控制台程序，不依赖 Qt 界面）。
+add_executable(scheduler_tests
+    tests/scheduler_tests.cpp
+    src/model/course.cpp
+    src/data/course_repository.cpp
+    src/data/csv_reader.cpp
+    src/data/json_reader.cpp
+    src/algorithm/scheduler.cpp
+    src/service/planning_service.cpp
+)
+
+target_link_libraries(scheduler_tests PRIVATE Qt6::Core)
