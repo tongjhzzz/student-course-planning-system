@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_IntelligentCoursePlanner_FILE /Users/daxian/个人项目/学生版-智能课程规划系统/build/IntelligentCoursePlanner)
-set(__QT_DEPLOY_TARGET_IntelligentCoursePlanner_TYPE EXECUTABLE)
