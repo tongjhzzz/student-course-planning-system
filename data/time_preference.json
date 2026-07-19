@@ -1,40 +1,4 @@
 {
-    "avoid_time_blocks": [
-        {
-            "beg": 1,
-            "day": "Fri",
-            "hard": false,
-            "last": 1,
-            "reason": "用户设置的尽量避开时间"
-        },
-        {
-            "beg": 2,
-            "day": "Fri",
-            "hard": false,
-            "last": 1,
-            "reason": "用户设置的尽量避开时间"
-        },
-        {
-            "beg": 3,
-            "day": "Fri",
-            "hard": false,
-            "last": 1,
-            "reason": "用户设置的尽量避开时间"
-        },
-        {
-            "beg": 4,
-            "day": "Fri",
-            "hard": false,
-            "last": 1,
-            "reason": "用户设置的尽量避开时间"
-        },
-        {
-            "beg": 5,
-            "day": "Fri",
-            "hard": false,
-            "last": 1,
-            "reason": "用户设置的尽量避开时间"
-        }
-    ],
-    "description": "用户设置的尽量避开上课时间"
+    "description": "用户设置的尽量避开上课时间",
+    "avoid_time_blocks": []
 }

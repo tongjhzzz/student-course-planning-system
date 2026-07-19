@@ -2,6 +2,7 @@
 
 #include "../algorithm/scheduler.h"
 #include "../data/csv_reader.h"
+#include "../data/manual_course_plan_storage.h"
 #include "../data/time_preference_storage.h"
 #include "../service/planning_service.h"
 #include "../output/schedule_exporter.h"
@@ -80,6 +81,7 @@ MainWindow::MainWindow(QWidget* parent)
     loadCourseData();
     loadProfileFiles();
     loadTimePreferences();
+    loadManualCoursePlan();
 
     setWindowTitle("智能课程规划系统");
     resize(1320, 930);
@@ -159,6 +161,9 @@ void MainWindow::createInterface()
 
     createCourseQueryPage();
     termTabWidget->addTab(courseQueryPage, "课程查询");
+
+    createManualCoursePlanPage();
+    termTabWidget->addTab(manualCoursePlanPage, "我的选课方案");
 
     createTimePreferencePage();
     termTabWidget->addTab(timePreferencePage, "时间偏好");
@@ -256,12 +261,88 @@ void MainWindow::createCourseQueryPage()
 
     pageLayout->addWidget(courseQueryTable, 1);
 
+    QHBoxLayout* manualPlanLayout = new QHBoxLayout;
+    manualPlanTermComboBox = new QComboBox(courseQueryPage);
+    for (int term = 1; term <= 8; ++term) {
+        manualPlanTermComboBox->addItem(
+            "第 " + QString::number(term) + " 学期", term);
+    }
+    addToManualPlanButton = new QPushButton("加入我的方案", courseQueryPage);
+
+    manualPlanLayout->addWidget(
+        new QLabel("选中教学班后，计划加入：", courseQueryPage));
+    manualPlanLayout->addWidget(manualPlanTermComboBox);
+    manualPlanLayout->addWidget(addToManualPlanButton);
+    manualPlanLayout->addStretch();
+    pageLayout->addLayout(manualPlanLayout);
+
     connect(queryButton, &QPushButton::clicked,
             this, [this]() { queryCourses(); });
     connect(resetQueryButton, &QPushButton::clicked,
             this, [this]() { resetCourseQuery(); });
     connect(courseKeywordEdit, &QLineEdit::returnPressed,
             this, [this]() { queryCourses(); });
+    connect(addToManualPlanButton, &QPushButton::clicked,
+            this, [this]() { addSelectedCourseToManualPlan(); });
+}
+
+void MainWindow::createManualCoursePlanPage()
+{
+    manualCoursePlanPage = new QWidget(this);
+    QVBoxLayout* pageLayout = new QVBoxLayout(manualCoursePlanPage);
+    pageLayout->setContentsMargins(10, 10, 10, 10);
+    pageLayout->setSpacing(8);
+
+    QLabel* descriptionLabel = new QLabel(
+        "这里保存你手动加入的教学班。本基础版暂不检查先修课、"
+        "时间冲突和学分限制。", manualCoursePlanPage);
+    descriptionLabel->setWordWrap(true);
+    pageLayout->addWidget(descriptionLabel);
+
+    manualPlanSummaryLabel = new QLabel(manualCoursePlanPage);
+    pageLayout->addWidget(manualPlanSummaryLabel);
+
+    manualCoursePlanTable = new QTableWidget(manualCoursePlanPage);
+    const QStringList headers = {
+        "计划学期", "课程编号", "课程名称", "教学班", "类别", "学分",
+        "教师", "教室", "上课时间"
+    };
+    manualCoursePlanTable->setColumnCount(headers.size());
+    manualCoursePlanTable->setHorizontalHeaderLabels(headers);
+    manualCoursePlanTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    manualCoursePlanTable->setSelectionBehavior(QAbstractItemView::SelectRows);
+    manualCoursePlanTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    manualCoursePlanTable->setAlternatingRowColors(true);
+    manualCoursePlanTable->setWordWrap(false);
+    manualCoursePlanTable->verticalHeader()->setVisible(false);
+    manualCoursePlanTable->horizontalHeader()->setStretchLastSection(true);
+    manualCoursePlanTable->horizontalHeader()->setSectionResizeMode(
+        QHeaderView::ResizeToContents);
+    manualCoursePlanTable->setStyleSheet(
+        "QTableWidget { gridline-color: #AAB5BE; font-size: 12px; }"
+        "QHeaderView::section { background-color: #E5EDF2; padding: 6px; "
+        "border: 1px solid #9AA7B0; font-weight: bold; }");
+    pageLayout->addWidget(manualCoursePlanTable, 1);
+
+    QHBoxLayout* buttonLayout = new QHBoxLayout;
+    cancelManualCourseButton = new QPushButton("取消选中课程", manualCoursePlanPage);
+    clearManualPlanButton = new QPushButton("清空方案", manualCoursePlanPage);
+    saveManualPlanButton = new QPushButton("保存方案", manualCoursePlanPage);
+
+    buttonLayout->addWidget(cancelManualCourseButton);
+    buttonLayout->addWidget(clearManualPlanButton);
+    buttonLayout->addWidget(saveManualPlanButton);
+    buttonLayout->addStretch();
+    pageLayout->addLayout(buttonLayout);
+
+    connect(cancelManualCourseButton, &QPushButton::clicked,
+            this, [this]() { cancelSelectedManualCourse(); });
+    connect(clearManualPlanButton, &QPushButton::clicked,
+            this, [this]() { clearManualCoursePlan(); });
+    connect(saveManualPlanButton, &QPushButton::clicked,
+            this, [this]() { saveManualCoursePlan(); });
+
+    refreshManualCoursePlanTable();
 }
 
 void MainWindow::refreshCourseQueryOptions()
@@ -394,6 +475,151 @@ void MainWindow::queryCourses()
 
     queryCountLabel->setText("共找到 " + QString::number(resultCount)
                               + " 个符合条件的教学班。");
+}
+
+void MainWindow::addSelectedCourseToManualPlan()
+{
+    const int selectedRow = courseQueryTable->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::information(this, "请选择教学班",
+                                 "请先在查询结果中选中一个教学班。");
+        return;
+    }
+
+    const QTableWidgetItem* basicIdItem = courseQueryTable->item(selectedRow, 0);
+    const QTableWidgetItem* sectionIdItem = courseQueryTable->item(selectedRow, 2);
+    if (basicIdItem == nullptr || sectionIdItem == nullptr) {
+        QMessageBox::warning(this, "加入失败", "选中的教学班数据不完整。");
+        return;
+    }
+
+    ManualCourseSelection selection;
+    selection.basicId = basicIdItem->text().toStdString();
+    selection.sectionId = sectionIdItem->text().toStdString();
+    selection.term = manualPlanTermComboBox->currentData().toInt();
+
+    for (const ManualCourseSelection& existing : manualCourseSelections) {
+        if (existing.basicId == selection.basicId
+            && existing.sectionId == selection.sectionId
+            && existing.term == selection.term) {
+            QMessageBox::information(this, "已经加入",
+                                     "该教学班已经加入当前手动选课方案。\n"
+                                     "本基础版只阻止完全相同的重复记录。");
+            return;
+        }
+    }
+
+    manualCourseSelections.push_back(selection);
+    refreshManualCoursePlanTable();
+    termTabWidget->setCurrentWidget(manualCoursePlanPage);
+    statusLabel->setText("已加入手动选课方案。记得点击“保存方案”保存到文件。");
+}
+
+void MainWindow::refreshManualCoursePlanTable()
+{
+    if (manualCoursePlanTable == nullptr || manualPlanSummaryLabel == nullptr) {
+        return;
+    }
+
+    manualCoursePlanTable->setRowCount(0);
+
+    for (std::size_t index = 0; index < manualCourseSelections.size(); ++index) {
+        const ManualCourseSelection& selection = manualCourseSelections[index];
+        const Course* course = repository.findCourse(selection.basicId);
+        const CourseSection* section = repository.findSection(selection.basicId,
+                                                               selection.sectionId);
+        const int row = manualCoursePlanTable->rowCount();
+        manualCoursePlanTable->insertRow(row);
+
+        QString values[9] = {
+            "第 " + QString::number(selection.term) + " 学期",
+            QString::fromStdString(selection.basicId),
+            course == nullptr ? "课程数据未找到" : QString::fromStdString(course->name),
+            QString::fromStdString(selection.sectionId),
+            course == nullptr ? "" : QString::fromStdString(course->category),
+            course == nullptr ? "" : QString::number(course->credit, 'f', 1),
+            section == nullptr ? "教学班数据未找到" : QString::fromStdString(section->teacher),
+            section == nullptr ? "" : QString::fromStdString(section->classroom),
+            section == nullptr ? "" : formatSectionTimeSlots(*section)
+        };
+
+        for (int column = 0; column < 9; ++column) {
+            QTableWidgetItem* item = new QTableWidgetItem(values[column]);
+            item->setTextAlignment(column == 0 || column == 5
+                                       ? Qt::AlignCenter
+                                       : Qt::AlignLeft | Qt::AlignVCenter);
+            manualCoursePlanTable->setItem(row, column, item);
+        }
+    }
+
+    manualPlanSummaryLabel->setText(
+        "当前方案共有 " + QString::number(manualCourseSelections.size())
+        + " 条手动选课记录。未保存的修改在退出程序后不会保留。");
+}
+
+void MainWindow::cancelSelectedManualCourse()
+{
+    const int selectedRow = manualCoursePlanTable->currentRow();
+    if (selectedRow < 0
+        || selectedRow >= static_cast<int>(manualCourseSelections.size())) {
+        QMessageBox::information(this, "请选择课程",
+                                 "请先在表格中选中要取消的课程。");
+        return;
+    }
+
+    manualCourseSelections.erase(manualCourseSelections.begin() + selectedRow);
+    refreshManualCoursePlanTable();
+    statusLabel->setText("已取消选中的手动选课记录。记得点击“保存方案”保存修改。");
+}
+
+void MainWindow::clearManualCoursePlan()
+{
+    if (manualCourseSelections.empty()) {
+        return;
+    }
+
+    const QMessageBox::StandardButton answer = QMessageBox::question(
+        this, "确认清空", "确定清空当前手动选课方案中的全部课程吗？",
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+
+    if (answer != QMessageBox::Yes) {
+        return;
+    }
+
+    manualCourseSelections.clear();
+    refreshManualCoursePlanTable();
+    statusLabel->setText("已清空当前手动选课方案。记得点击“保存方案”保存修改。");
+}
+
+void MainWindow::loadManualCoursePlan()
+{
+    const std::string filePath = projectDirectory() + "/data/manual_course_plan.json";
+    std::string errorMessage;
+
+    if (!ManualCoursePlanStorage::loadSelections(filePath, manualCourseSelections,
+                                                  errorMessage)) {
+        statusLabel->setText("读取手动选课方案失败："
+                             + QString::fromStdString(errorMessage));
+        return;
+    }
+
+    refreshManualCoursePlanTable();
+}
+
+void MainWindow::saveManualCoursePlan()
+{
+    const std::string filePath = projectDirectory() + "/data/manual_course_plan.json";
+    std::string errorMessage;
+
+    if (!ManualCoursePlanStorage::saveSelections(filePath, manualCourseSelections,
+                                                  errorMessage)) {
+        QMessageBox::critical(this, "保存失败",
+                              QString::fromStdString(errorMessage));
+        return;
+    }
+
+    statusLabel->setText("手动选课方案已保存到 data/manual_course_plan.json。");
+    QMessageBox::information(this, "保存成功", "手动选课方案已保存。");
 }
 
 void MainWindow::resetCourseQuery()

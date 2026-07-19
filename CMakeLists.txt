@@ -15,6 +15,7 @@ add_executable(IntelligentCoursePlanner
     src/data/csv_reader.cpp
     src/data/json_reader.cpp
     src/data/time_preference_storage.cpp
+    src/data/manual_course_plan_storage.cpp
     src/algorithm/scheduler.cpp
     src/service/planning_service.cpp
     src/output/schedule_exporter.cpp

@@ -4,6 +4,7 @@
 #include "../algorithm/scheduler.h"
 #include "../data/course_repository.h"
 #include "../model/planning_constraints.h"
+#include "../model/manual_course_selection.h"
 
 #include <QMainWindow>
 
@@ -32,10 +33,17 @@ private:
     void createTimetableTable(QTableWidget* table);
     void createCourseQueryPage();
     void createTimePreferencePage();
+    void createManualCoursePlanPage();
     void loadCourseData();
     void refreshCourseQueryOptions();
     void queryCourses();
     void resetCourseQuery();
+    void addSelectedCourseToManualPlan();
+    void refreshManualCoursePlanTable();
+    void cancelSelectedManualCourse();
+    void clearManualCoursePlan();
+    void loadManualCoursePlan();
+    void saveManualCoursePlan();
     void createTimePreferenceTable();
     void toggleAvoidTimeSlot(int row, int column);
     void updateTimePreferenceCell(int day, int period);
@@ -83,6 +91,15 @@ private:
     QPushButton* resetQueryButton = nullptr;
     QLabel* queryCountLabel = nullptr;
     QTableWidget* courseQueryTable = nullptr;
+    QComboBox* manualPlanTermComboBox = nullptr;
+    QPushButton* addToManualPlanButton = nullptr;
+
+    QWidget* manualCoursePlanPage = nullptr;
+    QTableWidget* manualCoursePlanTable = nullptr;
+    QLabel* manualPlanSummaryLabel = nullptr;
+    QPushButton* cancelManualCourseButton = nullptr;
+    QPushButton* clearManualPlanButton = nullptr;
+    QPushButton* saveManualPlanButton = nullptr;
 
     CourseRepository repository;
     PlanningConstraints constraints;
@@ -91,6 +108,8 @@ private:
 
     // 下标 [星期][节次 - 1]；true 表示用户希望尽量避开该时间。
     std::array<std::array<bool, 13>, 7> avoidTimeSlots{};
+
+    std::vector<ManualCourseSelection> manualCourseSelections;
 };
 
 #endif // MAIN_WINDOW_H
