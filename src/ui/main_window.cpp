@@ -2,6 +2,7 @@
 
 #include "../algorithm/scheduler.h"
 #include "../data/csv_reader.h"
+#include "../data/json_reader.h"
 #include "../data/manual_course_plan_storage.h"
 #include "../data/time_preference_storage.h"
 #include "../service/planning_service.h"
@@ -294,8 +295,9 @@ void MainWindow::createManualCoursePlanPage()
     pageLayout->setSpacing(8);
 
     QLabel* descriptionLabel = new QLabel(
-        "这里保存你手动加入的教学班。本基础版暂不检查先修课、"
-        "时间冲突和学分限制。", manualCoursePlanPage);
+        "这里保存你手动选择的教学班。点击“加入我的方案”时，系统会立即检查"
+        "重复选课、课程开设学期、时间冲突、学分上限和先修课等约束。"
+        "通过检查的课程会固定安排到指定学期。", manualCoursePlanPage);
     descriptionLabel->setWordWrap(true);
     pageLayout->addWidget(descriptionLabel);
 
@@ -498,21 +500,107 @@ void MainWindow::addSelectedCourseToManualPlan()
     selection.sectionId = sectionIdItem->text().toStdString();
     selection.term = manualPlanTermComboBox->currentData().toInt();
 
+    // 同一门基础课程只能选择一个教学班和一个目标学期。
+    // 如需换班或调整学期，必须先在“我的选课方案”中取消原记录。
     for (const ManualCourseSelection& existing : manualCourseSelections) {
-        if (existing.basicId == selection.basicId
-            && existing.sectionId == selection.sectionId
-            && existing.term == selection.term) {
-            QMessageBox::information(this, "已经加入",
-                                     "该教学班已经加入当前手动选课方案。\n"
-                                     "本基础版只阻止完全相同的重复记录。");
+        if (existing.basicId == selection.basicId) {
+            const Course* course = repository.findCourse(existing.basicId);
+            const QString courseName = course == nullptr
+                ? QString::fromStdString(existing.basicId)
+                : QString::fromStdString(course->name)
+                      + "（" + QString::fromStdString(existing.basicId) + "）";
+
+            QMessageBox::information(
+                this, "该课程已经选择",
+                courseName + " 已加入第 "
+                + QString::number(existing.term) + " 学期，教学班为 "
+                + QString::fromStdString(existing.sectionId) + "。\n"
+                "同一门课程只能选择一个教学班。若要更换教学班或学期，"
+                "请先到“我的选课方案”中取消原记录。");
             return;
         }
+    }
+
+    if (!validateManualSelectionBeforeAdding(selection)) {
+        return;
     }
 
     manualCourseSelections.push_back(selection);
     refreshManualCoursePlanTable();
     termTabWidget->setCurrentWidget(manualCoursePlanPage);
     statusLabel->setText("已加入手动选课方案。记得点击“保存方案”保存到文件。");
+}
+
+bool MainWindow::validateManualSelectionBeforeAdding(
+    const ManualCourseSelection& selection)
+{
+    // 手动选课即时校验需要当前培养方案中的学分上限、开课要求等数据。
+    PlanningConstraints profileConstraints;
+    std::string errorMessage;
+    const std::string profilePath = selectedProfilePath();
+
+    if (profilePath.empty()
+        || !JsonReader::loadPlanningConstraints(profilePath,
+                                                profileConstraints,
+                                                errorMessage)) {
+        QMessageBox::warning(
+            this, "暂时无法校验",
+            "无法读取当前培养方案，因此不能安全地加入手动课程。\n"
+            + QString::fromStdString(errorMessage));
+        statusLabel->setText("手动选课未加入：无法读取当前培养方案。");
+        return false;
+    }
+
+    std::vector<ManualCourseSelection> candidateSelections =
+        manualCourseSelections;
+    candidateSelections.push_back(selection);
+
+    ScheduleConstraints scheduleConstraints =
+        PlanningService::toScheduleConstraints(
+            profileConstraints, buildUserAvoidTimeBlocks(), candidateSelections);
+
+    // 先检查能够直接判断的规则：重复、开课学期、时间冲突和学分上限。
+    const ManualPlanCheckResult manualCheck =
+        Scheduler::validateManualPlan(repository, scheduleConstraints);
+    if (!manualCheck.valid) {
+        QStringList problemLines;
+        for (const std::string& problem : manualCheck.problems) {
+            problemLines.append("- " + QString::fromStdString(problem));
+        }
+
+        QMessageBox::warning(
+            this, "不能加入手动课程",
+            "该课程违反了手动选课规则，因此没有加入方案：\n\n"
+            + problemLines.join('\n'));
+        statusLabel->setText("手动选课未加入：存在课程安排冲突或约束问题。");
+        return false;
+    }
+
+    // 再检查先修关系。此处只验证“手动课程及其先修课”能否排通，
+    // 不让培养方案中的总学分、最低学分等无关条件影响即时判断。
+    scheduleConstraints.requiredCourseIds.clear();
+    scheduleConstraints.electiveCandidateIds.clear();
+    scheduleConstraints.minCreditPerTerm.fill(0.0);
+    scheduleConstraints.minTotalCredit = 0.0;
+    scheduleConstraints.electiveMinCredit = 0.0;
+
+    const ScheduleResult prerequisiteCheck =
+        Scheduler::makeSchedule(repository, scheduleConstraints);
+    if (!prerequisiteCheck.success) {
+        QStringList problemLines;
+        for (const std::string& problem : prerequisiteCheck.problems) {
+            problemLines.append("- " + QString::fromStdString(problem));
+        }
+
+        QMessageBox::warning(
+            this, "不能加入手动课程",
+            "该课程的先修关系无法满足，因此没有加入方案：\n\n"
+            + problemLines.join('\n'));
+        statusLabel->setText("手动选课未加入：先修关系无法满足。");
+        return false;
+    }
+
+    return true;
 }
 
 void MainWindow::refreshManualCoursePlanTable()
@@ -787,8 +875,30 @@ void MainWindow::updateTimePreferenceSummary()
 
     timePreferenceSummaryLabel->setText(
         "当前已选择 " + QString::number(selectedCount)
-        + " 个尽量避开时间。当前版本会保存该偏好，"
-          "排课算法接入后将据此尽量避开这些时间。");
+        + " 个尽量避开时间。生成规划时，算法会尽量避开这些时间。");
+}
+
+std::vector<TimePreferenceBlock> MainWindow::buildUserAvoidTimeBlocks() const
+{
+    std::vector<TimePreferenceBlock> blocks;
+
+    for (int day = 0; day < 7; ++day) {
+        for (int period = 1; period <= kPeriodCount; ++period) {
+            if (!avoidTimeSlots[day][period - 1]) {
+                continue;
+            }
+
+            TimePreferenceBlock block;
+            block.day = day;
+            block.beginPeriod = period;
+            block.duration = 1;
+            block.hard = false;
+            block.reason = "用户设置的尽量避开时间";
+            blocks.push_back(block);
+        }
+    }
+
+    return blocks;
 }
 
 void MainWindow::loadTimePreferences()
@@ -977,8 +1087,10 @@ void MainWindow::generateSchedule()
         return;
     }
 
-    const ScheduleResult result =
-        PlanningService::createSchedule(repository, constraints);
+    // 同时传入用户的时间偏好和手动选课方案，
+    // 让算法按指定教学班、指定学期固定安排手动课程。
+    const ScheduleResult result = PlanningService::createSchedule(
+        repository, constraints, buildUserAvoidTimeBlocks(), manualCourseSelections);
 
     currentScheduleResult = result;
     hasScheduleResult = true;

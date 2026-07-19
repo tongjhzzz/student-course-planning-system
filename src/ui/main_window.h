@@ -39,6 +39,8 @@ private:
     void queryCourses();
     void resetCourseQuery();
     void addSelectedCourseToManualPlan();
+    bool validateManualSelectionBeforeAdding(
+        const ManualCourseSelection& selection);
     void refreshManualCoursePlanTable();
     void cancelSelectedManualCourse();
     void clearManualCoursePlan();
@@ -48,6 +50,7 @@ private:
     void toggleAvoidTimeSlot(int row, int column);
     void updateTimePreferenceCell(int day, int period);
     void updateTimePreferenceSummary();
+    std::vector<TimePreferenceBlock> buildUserAvoidTimeBlocks() const;
     void loadTimePreferences();
     void saveTimePreferences();
     void clearTimePreferences();
