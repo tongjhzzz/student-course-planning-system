@@ -16,6 +16,7 @@ add_executable(IntelligentCoursePlanner
     src/data/json_reader.cpp
     src/algorithm/scheduler.cpp
     src/service/planning_service.cpp
+    src/output/schedule_exporter.cpp
     src/ui/main_window.cpp
 )
 

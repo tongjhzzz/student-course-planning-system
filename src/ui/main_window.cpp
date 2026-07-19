@@ -3,11 +3,13 @@
 #include "../algorithm/scheduler.h"
 #include "../data/csv_reader.h"
 #include "../service/planning_service.h"
+#include "../output/schedule_exporter.h"
 
 #include <QAbstractItemView>
 #include <QComboBox>
 #include <QDoubleSpinBox>
 #include <QDir>
+#include <QFileDialog>
 #include <QFileInfo>
 #include <QGridLayout>
 #include <QHeaderView>
@@ -126,10 +128,13 @@ void MainWindow::createInterface()
     QLabel* profileLabel = new QLabel("选择专业培养方案：", this);
     profileComboBox = new QComboBox(this);
     generateButton = new QPushButton("生成八学期规划", this);
+    exportButton = new QPushButton("导出当前规划 CSV", this);
+    exportButton->setEnabled(false);
 
     controlLayout->addWidget(profileLabel);
     controlLayout->addWidget(profileComboBox, 1);
     controlLayout->addWidget(generateButton);
+    controlLayout->addWidget(exportButton);
     mainLayout->addLayout(controlLayout);
 
     statusLabel = new QLabel("请选择培养方案，然后点击“生成八学期规划”。", this);
@@ -166,6 +171,8 @@ void MainWindow::createInterface()
 
     connect(generateButton, &QPushButton::clicked,
             this, [this]() { generateSchedule(); });
+    connect(exportButton, &QPushButton::clicked,
+            this, [this]() { exportSchedule(); });
 }
 
 void MainWindow::createCourseQueryPage()
@@ -486,6 +493,8 @@ void MainWindow::generateSchedule()
     std::string errorMessage;
 
     generateButton->setEnabled(false);
+    exportButton->setEnabled(false);
+    hasScheduleResult = false;
     statusLabel->setText("正在读取数据并生成课程规划，请稍候……");
 
     if (!PlanningService::loadPlanningData(courseInfoPath,
@@ -504,9 +513,53 @@ void MainWindow::generateSchedule()
 
     const ScheduleResult result =
         PlanningService::createSchedule(repository, constraints);
-    showScheduleResult(result);
+
+    currentScheduleResult = result;
+    hasScheduleResult = true;
+
+    showScheduleResult(currentScheduleResult);
+    exportButton->setEnabled(true);
 
     generateButton->setEnabled(true);
+}
+
+void MainWindow::exportSchedule()
+{
+    if (!hasScheduleResult) {
+        QMessageBox::information(this, "暂不能导出",
+                                 "请先生成一份八学期课程规划。");
+        return;
+    }
+
+    const QString defaultFilePath = QDir::homePath()
+        + "/课程规划结果.csv";
+    QString filePath = QFileDialog::getSaveFileName(
+        this,
+        "导出课程规划 CSV",
+        defaultFilePath,
+        "CSV 文件 (*.csv)");
+
+    if (filePath.isEmpty()) {
+        return;
+    }
+
+    if (!filePath.endsWith(".csv", Qt::CaseInsensitive)) {
+        filePath += ".csv";
+    }
+
+    std::string errorMessage;
+    if (!ScheduleExporter::exportToCsv(currentScheduleResult,
+                                       filePath.toStdString(),
+                                       errorMessage)) {
+        QMessageBox::critical(this, "导出失败",
+                              QString::fromStdString(errorMessage));
+        return;
+    }
+
+    statusLabel->setText("课程规划已导出到：" + filePath);
+    QMessageBox::information(this, "导出成功",
+                             "课程规划 CSV 已成功保存。\n\n"
+                             + filePath);
 }
 
 void MainWindow::showScheduleResult(const ScheduleResult& result)

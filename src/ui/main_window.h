@@ -1,6 +1,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include "../algorithm/scheduler.h"
 #include "../data/course_repository.h"
 #include "../model/planning_constraints.h"
 
@@ -17,7 +18,6 @@ class QTableWidget;
 class QTextEdit;
 class QTabWidget;
 class QWidget;
-class ScheduleResult;
 
 // 智能课程规划系统的主窗口。
 class MainWindow : public QMainWindow
@@ -35,6 +35,7 @@ private:
     void resetCourseQuery();
     void loadProfileFiles();
     void generateSchedule();
+    void exportSchedule();
     void showScheduleResult(const ScheduleResult& result);
     void clearScheduleTables();
 
@@ -47,6 +48,7 @@ private:
 
     QComboBox* profileComboBox = nullptr;
     QPushButton* generateButton = nullptr;
+    QPushButton* exportButton = nullptr;
     QLabel* statusLabel = nullptr;
     QLabel* dataSummaryLabel = nullptr;
     QLabel* resultSummaryLabel = nullptr;
@@ -68,6 +70,8 @@ private:
 
     CourseRepository repository;
     PlanningConstraints constraints;
+    ScheduleResult currentScheduleResult;
+    bool hasScheduleResult = false;
 };
 
 #endif // MAIN_WINDOW_H
