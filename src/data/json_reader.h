@@ -1,5 +1,5 @@
 #ifndef JSON_READER_H
-#define JSON_READER_H
+#define JSON_READER_H// 头文件保护
 
 #include "../model/planning_constraints.h"
 

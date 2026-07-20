@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-// 负责保存和读取用户手动选择的课程方案。
+// 负责保存和读取用户手动选择的课程方案
 class ManualCoursePlanStorage
 {
 public:

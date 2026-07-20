@@ -198,7 +198,7 @@ std::vector<std::string> CsvReader::parseCsvLine(const std::string& line)
 
 std::string CsvReader::trim(const std::string& text)// 用于删除一个字符串开头和结尾处多余的空白字符
 {
-    const std::string whitespace = " \t\r\n";
+    const std::string whitespace = " \t\r\n";// 包括空格，水平制表符，回车符，换行符
     const std::size_t first = text.find_first_not_of(whitespace);
 
     if (first == std::string::npos) {
@@ -206,7 +206,7 @@ std::string CsvReader::trim(const std::string& text)// 用于删除一个字符�
     }
 
     const std::size_t last = text.find_last_not_of(whitespace);
-    return text.substr(first, last - first + 1);
+    return text.substr(first, last - first + 1);// 返回删除了开头和结尾多余字符的字符串
 }
 
 std::vector<std::string> CsvReader::splitPrerequisiteIds(// 将 "A;B;C" 拆分为 {"A", "B", "C"}。
@@ -240,28 +240,29 @@ int CsvReader::dayToNumber(const std::string& dayText)
     return -1;
 }
 
-bool CsvReader::buildHeaderIndex(// 建立“列名 -> 列号”的对应关系，并检查必须字段是否存在。
-    const std::vector<std::string>& header,
+// 读取CSV文件中的表头行，建立 列名-这一列的位置 的对应表，然后检查程序需要的列是否都存在
+bool CsvReader::buildHeaderIndex(
+    const std::vector<std::string>& header,// 解析好的CSV表头
     const std::vector<std::string>& requiredColumns,
-    std::unordered_map<std::string, int>& headerIndex,
+    std::unordered_map<std::string, int>& headerIndex,// 把对应关系写进这里
     std::string& errorMessage)
 {
     headerIndex.clear();
 
     for (std::size_t index = 0; index < header.size(); ++index) {
-        std::string columnName = trim(header[index]);
+        std::string columnName = trim(header[index]);// 去掉前后可能存在的引号，只保留里面的内容
 
         // UTF-8 BOM 可能出现在 CSV 文件第一个表头字段的开头。
         if (index == 0 && columnName.size() >= 3
             && static_cast<unsigned char>(columnName[0]) == 0xEF
             && static_cast<unsigned char>(columnName[1]) == 0xBB
             && static_cast<unsigned char>(columnName[2]) == 0xBF) {
-            columnName.erase(0, 3);
+            columnName.erase(0, 3);// 如果存在就删除前3个字节
         }
 
-        headerIndex[columnName] = static_cast<int>(index);
+        headerIndex[columnName] = static_cast<int>(index);// 建立一一对应的映射
     }
-
+    // 遍历检查是否缺少必要的表头
     for (const std::string& columnName : requiredColumns) {
         if (headerIndex.find(columnName) == headerIndex.end()) {
             errorMessage = "CSV 文件缺少必要字段：" + columnName;
@@ -272,7 +273,25 @@ bool CsvReader::buildHeaderIndex(// 建立“列名 -> 列号”的对应关系�
     return true;
 }
 
-// 安全取得某一列的文本；列不存在或行数据不完整时返回空字符串。
+// CSV 表头
+// course_basic_ID,course_sp_ID,course_name,credit
+//                  ↓
+// 遍历每个列名，去空格、处理首列 BOM
+//                  ↓
+// 建立 headerIndex
+// "course_basic_ID" → 0
+// "course_sp_ID"     → 1
+// "course_name"      → 2
+// "credit"           → 3
+//                  ↓
+// 检查 requiredColumns 中的字段是否全部存在
+//                  ↓
+// 存在：返回 true
+// 缺少：写入错误信息，返回 false
+
+
+
+// 根据列名，从已经解析好的一行CSV数据中，安全的读取对应字段的内容
 std::string CsvReader::getField(
     const std::vector<std::string>& fields,
     const std::unordered_map<std::string, int>& headerIndex,

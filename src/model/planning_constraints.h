@@ -6,7 +6,7 @@
 #include <vector>
 
 // 表示培养方案中“尽量避开”或“优先安排”的一个时间段。
-struct TimePreferenceBlock
+struct TimePreferenceBlock// 时间偏好
 {
     int day = -1;          // 星期一到星期日分别用 0 到 6 表示。
     int beginPeriod = 0;   // 开始节次。
@@ -18,11 +18,11 @@ struct TimePreferenceBlock
 // 保存一个专业培养方案中与课程规划有关的约束条件。
 struct PlanningConstraints
 {
-    std::string profileId;
-    std::string profileName;
-    std::string description;
-    std::string targetDepartment;
-    std::vector<std::string> supportDepartments;
+    std::string profileId;// 培养方案ID
+    std::string profileName;// 培养方案名字
+    std::string description;// 培养方案描述
+    std::string targetDepartment;// 培养方案面向的专业
+    std::vector<std::string> supportDepartments;// 支持或适用的其他院系列表
 
     // 必修课程和候选选修课程的基础课程编号。
     std::vector<std::string> requiredCourseIds;

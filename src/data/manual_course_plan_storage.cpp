@@ -14,7 +14,7 @@ bool ManualCoursePlanStorage::loadSelections(
 {
     QFile inputFile(QString::fromUtf8(filePath.c_str()));
 
-    // 第一次使用时文件还不存在，这代表用户还没有保存过方案。
+    // 第一次使用时文件还不存在，这代表用户还没有保存过方案
     if (!inputFile.exists()) {
         selections.clear();
         errorMessage.clear();

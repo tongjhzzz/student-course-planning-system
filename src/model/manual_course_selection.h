@@ -3,7 +3,7 @@
 
 #include <string>
 
-// 表示用户手动加入方案的一门具体教学班。
+// 表示用户手动加入方案的一门具体教学班
 struct ManualCourseSelection
 {
     std::string basicId;   // 课程编号

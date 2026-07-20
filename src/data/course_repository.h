@@ -19,6 +19,7 @@ public:
     bool addSection(const CourseSection& section);
 
     // 为指定教学班添加一段上课时间。教学班不存在时返回 false。
+    // 通过basicID和sectionId来定位每一个课程班，来为课程班添加时间段
     bool addTimeSlot(const std::string& basicId,
                      const std::string& sectionId,
                      const TimeSlot& timeSlot);
@@ -30,7 +31,7 @@ public:
     const CourseSection* findSection(const std::string& basicId,
                                      const std::string& sectionId) const;
 
-    // 查找一门课程的所有教学班；找不到时返回 nullptr。
+    // 查找一门课程的所有教学班；找不到时返回 nullptr，返回的是指针，如果直接返回对象，会复制一份对象
     const std::vector<CourseSection>* findSections(
         const std::string& basicId) const;
 

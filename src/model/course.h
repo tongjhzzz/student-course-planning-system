@@ -47,10 +47,18 @@ struct CourseSection
     std::string teacher;                 // teacher
     std::string classroom;               // classroom
     int capacity = 0;                    // limits，人数上限
-    std::vector<TimeSlot> timeSlots;     // 该教学班的全部上课时间段
+    std::vector<TimeSlot> timeSlots;     // 该教学班的全部上课时间段，课程时间是某个课程的教学班的属性而不是某个课程的属性
 
     // 返回“基础课程 ID#教学班 ID”形式的唯一标识。
-    std::string uniqueKey() const;
+    std::string uniqueKey() const;// 课程ID+教学班ID 才可以精准定位到一个具体的教学班
 };
 
 #endif // COURSE_H
+
+// Course（基础课程）
+//    ├── CourseSection（教学班 1）
+//    │      └── TimeSlot（上课时间段，可有多个）
+//    ├── CourseSection（教学班 2）
+//    │      └── TimeSlot（上课时间段，可有多个）
+//    └── CourseSection（教学班 3）
+//           └── TimeSlot（上课时间段，可有多个）

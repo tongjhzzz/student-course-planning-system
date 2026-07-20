@@ -82,6 +82,7 @@ const CourseSection* CourseRepository::findSection(
     return nullptr;
 }
 
+// 查找一门课程的所有教学班
 const std::vector<CourseSection>* CourseRepository::findSections(
     const std::string& basicId) const
 {
@@ -135,7 +136,7 @@ CourseSection* CourseRepository::findSectionForUpdate(
 
     for (CourseSection& section : it->second) {
         if (section.sectionId == sectionId) {
-            return &section;
+            return &section;// 返回可修改地址
         }
     }
 

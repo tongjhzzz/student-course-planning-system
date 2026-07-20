@@ -51,3 +51,13 @@ private:
 };
 
 #endif // CSV_READER_H
+
+// course_info.csv
+//     ↓
+// 创建 Course（基础课程）
+// 创建 CourseSection（教学班）
+//     ↓
+// course_time.csv
+//     ↓
+// 找到对应的 CourseSection
+// 为它添加 TimeSlot（上课时间）
